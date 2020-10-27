@@ -1,12 +1,17 @@
 {
-  "name": "ALP_Music",
-  "displayName": "ALP_Music",
   "expo": {
-    "name": "ALP_Music",
-    "slug": "ALP_Music",
+    "name": "ALPMusic",
+    "slug": "ALPMusic",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "description": "music licensing",
+    "sdkVersion": "39.0.0",
+    "platforms": ["ios", "android", "web"],
+    "android": {
+      "package": "com.alpmusic"
+    },
+    "ios": {
+      "bundleIdentifier": "com.com.alpmusic"
+    }
   }
 }
