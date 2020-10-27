@@ -62,3 +62,8 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+# Other
+InitializeFirebase.js
+InitializeStripe.js
+functions/

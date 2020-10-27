@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "470035220482",
+    "firebase_url": "https://alp-music.firebaseio.com",
+    "project_id": "alp-music",
+    "storage_bucket": "alp-music.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470035220482:android:ec4f5f2044269497f43f1b",
+        "android_client_info": {
+          "package_name": "com.alp.alpmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470035220482-l5u3k3jn4s0tuia2jqg8o7sis2oh558l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPTXvVGN2s7Ls6G-PpOle9wzg3YMrfNiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470035220482-l5u3k3jn4s0tuia2jqg8o7sis2oh558l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "470035220482-n4rjbcqr9c1e18f03g5pb2q12feosoaq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.ALPMusic"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470035220482:android:3f7b35775d3919c0f43f1b",
+        "android_client_info": {
+          "package_name": "com.alpmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470035220482-l5u3k3jn4s0tuia2jqg8o7sis2oh558l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPTXvVGN2s7Ls6G-PpOle9wzg3YMrfNiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470035220482-l5u3k3jn4s0tuia2jqg8o7sis2oh558l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "470035220482-n4rjbcqr9c1e18f03g5pb2q12feosoaq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.ALPMusic"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
