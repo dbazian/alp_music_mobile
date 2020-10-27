@@ -7,6 +7,8 @@ platform :ios, '10.0'
 target 'ALPMusic' do
   use_unimodules!
   config = use_native_modules!
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'	
 
   use_react_native!(:path => config["reactNativePath"])
 

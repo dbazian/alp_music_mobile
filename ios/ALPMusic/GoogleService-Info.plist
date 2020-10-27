@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>470035220482-n4rjbcqr9c1e18f03g5pb2q12feosoaq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.470035220482-n4rjbcqr9c1e18f03g5pb2q12feosoaq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAcKVLkdo9_X1lKowpEpeHStVjCe76T2nA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>470035220482</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.name.ALPMusic</string>
+	<key>PROJECT_ID</key>
+	<string>alp-music</string>
+	<key>STORAGE_BUCKET</key>
+	<string>alp-music.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:470035220482:ios:94e2a897f613d11cf43f1b</string>
+	<key>DATABASE_URL</key>
+	<string>https://alp-music.firebaseio.com</string>
+</dict>
+</plist>
