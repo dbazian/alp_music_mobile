@@ -1,0 +1,12 @@
+{
+  "name": "ALP_Music",
+  "displayName": "ALP_Music",
+  "expo": {
+    "name": "ALP_Music",
+    "slug": "ALP_Music",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
