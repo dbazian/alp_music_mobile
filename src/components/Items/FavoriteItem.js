@@ -21,32 +21,24 @@ import { faStar as falStar } from "@fortawesome/free-solid-svg-icons";
 import Colors from "../../../constants/Colors";
 
 const FavoriteItem = (props) => {
-  const favorites = useSelector((state) => state.favorite.favorites);
   const [iconSwitch, setIconSwitch] = useState(faShoppingCart);
   const [favoriteIconToggle, setFavoriteIconToggle] = useState(faStar);
   const itemInCart = useSelector((state) =>
     Object.keys(state.cart.items).some((id) => parseInt(id) === props.items.id)
   );
-
   const itemInOrder = useSelector((state) =>
     state.order.orders.some((song) =>
       song.items.some((id) => id.id === props.items.id)
     )
   );
-
   const itemInFavorites = useSelector((state) =>
     state.favorite.favorites.some((id) => id.id === props.items.id)
   );
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(favoriteActions.setFavorite());
   }, []);
-
-  const handleLicenseScreen = () => {
-    props.navigation.navigate({ routeName: "License" });
-  };
 
   useEffect(() => {
     if (itemInCart) {
@@ -70,8 +62,12 @@ const FavoriteItem = (props) => {
     }
   }, [itemInFavorites]);
 
+  const handleLicenseScreen = () => {
+    props.navigation.navigate({ routeName: "License" });
+  };
+
   const favoritesPress = async () => {
-    await dispatch(favoriteActions.removeFavorite(props.items.fid));
+    dispatch(favoriteActions.removeFavorite(props.items.fid));
     dispatch(favoriteActions.setFavorite());
   };
 

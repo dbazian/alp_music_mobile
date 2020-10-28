@@ -18,6 +18,7 @@ const LicenseScreen = (props) => {
   const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
   const songId = useSelector((state) => state.license.data);
   const dispatch = useDispatch();
+  const { goBack } = props.navigation;
 
   useEffect(() => {
     props.navigation.addListener("didFocus", () => {
@@ -66,10 +67,6 @@ const LicenseScreen = (props) => {
     props.navigation.navigate({ routeName: "Cart" });
   };
 
-  const handleSongPage = () => {
-    props.navigation.navigate({ routeName: "Songs" });
-  };
-
   return (
     <Gradient>
       <View style={styles.container}>
@@ -92,7 +89,7 @@ const LicenseScreen = (props) => {
           }}
         />
         <View style={styles.bottomButton}>
-          <SmallButton name={"Back"} onPress={handleSongPage} />
+          <SmallButton name={"Back"} onPress={() => goBack()} />
         </View>
       </View>
     </Gradient>

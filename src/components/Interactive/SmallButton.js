@@ -9,19 +9,19 @@ import Colors from "../../../constants/Colors";
 const SmallButton = (props) => {
   return (
     <TouchableOpacity
-      style={styles.loginScreenButton}
+      style={styles.button}
       underlayColor="#fff"
       activeOpacity={0.5}
       onPress={props.onPress}
       disabled={props.disabled}
     >
-      <Text style={styles.loginText}>{props.name}</Text>
+      <Text style={styles.text}>{props.name}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  loginScreenButton: {
+  button: {
     height: wp("9%"),
     justifyContent: "center",
     marginTop: 10,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowOffset: { width: 0, height: 5 },
   },
-  loginText: {
+  text: {
     textAlign: "center",
     color: "white",
     fontSize: hp("2%"),

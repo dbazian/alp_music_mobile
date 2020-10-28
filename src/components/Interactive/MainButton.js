@@ -9,19 +9,19 @@ import {
 const MainButton = (props) => {
   return (
     <TouchableOpacity
-      style={styles.loginScreenButton}
+      style={styles.button}
       onPress={props.onPress}
       disabled={props.disabled}
       activeOpacity={0.5}
       underlayColor="#fff"
     >
-      <Text style={styles.loginText}>{props.name}</Text>
+      <Text style={styles.text}>{props.name}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  loginScreenButton: {
+  button: {
     marginTop: 10,
     marginBottom: 20,
     justifyContent: "center",
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: wp("1%") },
     elevation: 3,
   },
-  loginText: {
+  text: {
     color: "white",
     textAlign: "center",
     fontSize: hp("3%"),
