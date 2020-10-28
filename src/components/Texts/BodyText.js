@@ -1,11 +1,12 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-const BodyText = (props) => <Text numberOfLines={2} style={styles.body}>{props.children}</Text>;
+const BodyText = (props) => (
+  <Text numberOfLines={2} style={styles.body}>
+    {props.children}
+  </Text>
+);
 
 const styles = StyleSheet.create({
   body: {
