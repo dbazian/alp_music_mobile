@@ -4,10 +4,7 @@ import HeaderText from "../components/Texts/HeaderText";
 import MainButton from "../components/Interactive/MainButton";
 import Gradient from "../components/Wrappers/Gradient";
 import EmailLink from "../components/Texts/EmailLink";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const HelpModal = (props) => {
   return (
@@ -55,12 +52,11 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 5,
     textAlign: "center",
+    paddingHorizontal: 10,
   },
   buttonBox: {
-    justifyContent: "center",
     alignItems: "center",
     marginVertical: 40,
-    width: "100%",
   },
   textBox: {
     paddingVertical: 20,
