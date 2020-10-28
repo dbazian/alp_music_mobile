@@ -15,7 +15,6 @@ import Colors from "../../../constants/Colors";
 
 const Download = (props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const task = storage().ref(props.audioFile).getDownloadURL();
 
   const downloadPermission = async () => {
     try {
@@ -24,7 +23,7 @@ const Download = (props) => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log("permissions granted");
-        const source = await task;
+        const source = await storage().ref(props.audioFile).getDownloadURL();
         let dirs = RNFetchBlob.fs.dirs;
         setIsLoading(true);
         RNFetchBlob.config({

@@ -13,18 +13,13 @@ const Download = (props) => {
 
   const downloadSong = async () => {
     const source = await storage().ref(props.audioFile).getDownloadURL();
-    const {
-      dirs: { DocumentDir },
-    } = RNFetchBlob.fs;
-    const configOptions = {
-      ios: {
-        fileCache: true,
-        path: DocumentDir + "/" + props.audioFile,
-        appendExt: "mp3",
-      },
-    };
+    let dirs = RNFetchBlob.fs.dirs;
     setIsLoading(true);
-    RNFetchBlob.config(configOptions)
+    RNFetchBlob.config({
+      fileCache: false,
+      path: dirs.DocumentDir + "/" + props.audioFile,
+      appendExt: "mp3",
+    })
       .fetch("GET", source)
       .then((res) => {
         RNFetchBlob.ios.previewDocument(res.path());
