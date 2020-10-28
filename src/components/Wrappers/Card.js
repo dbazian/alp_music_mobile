@@ -1,10 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const Card = (props) => {
   return <View style={styles.container}>{props.children}</View>;
