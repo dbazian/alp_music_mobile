@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   TouchableOpacity,
-  Platform,
   PermissionsAndroid,
   Alert,
   Linking,
@@ -23,40 +22,35 @@ const Download = (props) => {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
       );
-
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log("permissions granted");
         const source = await task;
-        const {
-          dirs: { DownloadDir },
-        } = RNFetchBlob.fs;
-        const { config } = RNFetchBlob;
-        const aPath = DownloadDir;
-        var ext = "mp3";
-        var file_ex = props.audioFile;
-        const configOptions = Platform.select({
-          android: {
-            fileCache: false,
-            appendExt: ext,
-            addAndroidDownloads: {
-              useDownloadManager: true,
-              notification: true,
-              path: aPath + "/" + file_ex,
-              description: "Song",
-            },
-          },
-        });
+        let dirs = RNFetchBlob.fs.dirs;
         setIsLoading(true);
-        config(configOptions)
+        RNFetchBlob.config({
+          fileCache: false,
+          appendExt: "mp3",
+          addAndroidDownloads: {
+            useDownloadManager: true,
+            notification: true,
+            path: dirs.DownloadDir + "/" + props.audioFile,
+            description: "Song",
+          },
+        })
           .fetch("GET", source)
           .then((res) => {
             console.log("file_download", res);
             setIsLoading(false);
-            Alert.alert("Your file is done downloading!");
+            Alert.alert(
+              "Your file is done downloading and added to Files/Audio!"
+            );
           })
           .catch((errorMessage) => {
             setIsLoading(false);
             console.log("error with downloading file", errorMessage);
+            Alert.alert(
+              "There was an error downloading file please try again later."
+            );
           });
       } else if (granted === PermissionsAndroid.RESULTS.DENIED) {
         console.log("permission denied");
