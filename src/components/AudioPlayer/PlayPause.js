@@ -19,9 +19,7 @@ const PlayPause = (props) => {
   const dispatch = useDispatch();
 
   // LOAD FROM FIREBASE VARIABLES
-  let audioFile = props.audioFile;
-  const reference = storage().ref(audioFile);
-  let task = reference.getDownloadURL();
+  let task = storage().ref(props.audioFile).getDownloadURL();
 
   //HOOKS
   const stopAudio = useSelector((state) => state.player.stopAudio);

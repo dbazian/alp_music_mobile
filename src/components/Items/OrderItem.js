@@ -22,9 +22,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFileInvoice } from "@fortawesome/pro-light-svg-icons";
 
 const OrderItem = (props) => {
-  const [showDetails, setShowDetails] = useState(false);
   const songDate = moment(props.date).format("MMMM Do YYYY");
-
+  const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => {
     setShowDetails((prevState) => !prevState);
   };
@@ -45,12 +44,11 @@ const OrderItem = (props) => {
         </View>
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.button} onPress={toggleDetails}>
-            <Text style={styles.textButton}>
+            <Text style={styles.detailsButton}>
               {showDetails ? "Hide Details" : "Show Details"}
             </Text>
           </TouchableOpacity>
         </View>
-
         {showDetails && (
           <View>
             {props.items.map((song) => (
@@ -105,7 +103,7 @@ const OrderItem = (props) => {
 };
 
 const styles = StyleSheet.create({
-  textButton: {
+  detailsButton: {
     color: Colors.primary,
     textAlign: "center",
     fontSize: hp("2.5%"),
@@ -116,8 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   buttonView: {
-    flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     marginVertical: hp("1.5%"),
   },
@@ -128,17 +124,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: hp("2.3%"),
     textAlign: "center",
-    marginBottom: 12,
+    marginBottom: 8,
   },
   space: {
-    flex: 2,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
   },
   songText: {
-    flex: 1,
-    flexDirection: "row",
+    flex: 2,
   },
 });
 

@@ -14,7 +14,6 @@ import {
   faShoppingCart,
   faTrash,
   faDownload,
-  faStar,
 } from "@fortawesome/pro-light-svg-icons";
 import { faStar as falStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,7 +21,6 @@ import Colors from "../../../constants/Colors";
 
 const FavoriteItem = (props) => {
   const [iconSwitch, setIconSwitch] = useState(faShoppingCart);
-  const [favoriteIconToggle, setFavoriteIconToggle] = useState(faStar);
   const itemInCart = useSelector((state) =>
     Object.keys(state.cart.items).some((id) => parseInt(id) === props.items.id)
   );
@@ -31,15 +29,14 @@ const FavoriteItem = (props) => {
       song.items.some((id) => id.id === props.items.id)
     )
   );
-  const itemInFavorites = useSelector((state) =>
-    state.favorite.favorites.some((id) => id.id === props.items.id)
-  );
   const dispatch = useDispatch();
 
+  // LOAD FAVORITES
   useEffect(() => {
     dispatch(favoriteActions.setFavorite());
   }, []);
 
+  // CHECK IF ITEM IS IN CART
   useEffect(() => {
     if (itemInCart) {
       setIconSwitch(faTrash);
@@ -48,43 +45,45 @@ const FavoriteItem = (props) => {
     }
   }, [itemInCart]);
 
+  // CHECK IF ITEM HAS BEEN PURCHASED
   useEffect(() => {
     if (itemInOrder) {
       setIconSwitch(faDownload);
     }
   });
 
-  useEffect(() => {
-    if (itemInFavorites) {
-      setFavoriteIconToggle(falStar);
-    } else {
-      setFavoriteIconToggle(faStar);
-    }
-  }, [itemInFavorites]);
-
+  // IF ITEM IS NOT IN CART
   const handleLicenseScreen = () => {
     props.navigation.navigate({ routeName: "License" });
   };
 
-  const favoritesPress = async () => {
+  // CLICK STAR ICON
+  const favoritesPress = () => {
     dispatch(favoriteActions.removeFavorite(props.items.fid));
     dispatch(favoriteActions.setFavorite());
   };
 
+  // CLICK CART ICON
   const cartPress = async () => {
+    // NOT IN CART OR PURCHASED
+
     if (itemInCart === false && itemInOrder === false) {
       dispatch(licenseActions.licenseInfo(props.items.id));
       handleLicenseScreen();
-    }
-    if (itemInCart === true && itemInOrder === false) {
+
+      // IN CART BUT NOT PURCHASED
+    } else if (itemInCart === true && itemInOrder === false) {
       dispatch(cartActions.removeFromCart(props.items));
       alert("Song has been removed from cart.");
+
+      // PURCHASED
     } else if (itemInCart === false && itemInOrder === true) {
       Alert.alert(
         "Song has already been purchased.",
         "Proceed to orders for download",
         [
           {
+            // CLICK DOWNLOAD ICON
             text: "Ok",
             onPress: () => props.navigation.navigate({ routeName: "Orders" }),
           },
@@ -115,7 +114,7 @@ const FavoriteItem = (props) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={favoritesPress}>
               <FontAwesomeIcon
-                icon={favoriteIconToggle}
+                icon={falStar}
                 size={hp("5%")}
                 color={Colors.primary}
               />
