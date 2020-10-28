@@ -16,32 +16,32 @@ import {
   faDownload,
   faStar,
 } from "@fortawesome/pro-light-svg-icons";
-
 import Colors from "../../../constants/Colors";
 
 const SongItem = (props) => {
   const [iconSwitch, setIconSwitch] = useState(faShoppingCart);
   const [styleToggle, setStyleToggle] = useState(styles.shown);
+
+  // IS ITEM IN CART
   const itemInCart = useSelector((state) =>
     Object.keys(state.cart.items).some((id) => parseInt(id) === props.items.id)
   );
 
+  // IS ITEM IN ORDERS
   const itemInOrder = useSelector((state) =>
     state.order.orders.some((song) =>
       song.items.some((id) => id.id === props.items.id)
     )
   );
 
+  // IS ITEM IN FAVORITES
   const itemInFavorites = useSelector((state) =>
     state.favorite.favorites.some((id) => id.id === props.items.id)
   );
 
   const dispatch = useDispatch();
 
-  const handleLicenseScreen = () => {
-    props.navigation.navigate({ routeName: "License" });
-  };
-
+  // SET ICON TO TRASH OR CART
   useEffect(() => {
     if (itemInCart) {
       setIconSwitch(faTrash);
@@ -50,33 +50,40 @@ const SongItem = (props) => {
     }
   }, [itemInCart]);
 
+  // SET ICON IF ITEM IS PURCHASED
   useEffect(() => {
     if (itemInOrder) {
       setIconSwitch(faDownload);
     }
   });
 
+  // SET ICON IF ITEM IS IN FAVORITES
   useEffect(() => {
-    if (!itemInFavorites) {
+    if (itemInFavorites) {
+      setStyleToggle(styles.hidden);
+    } else {
       setStyleToggle(styles.shown);
     }
   }, [itemInFavorites]);
 
-  const favoritesPress = async () => {
-    await dispatch(favoriteActions.addFavorite(props.items));
+  // CLICK STAR ICON
+  const favoritesPress = () => {
+    dispatch(favoriteActions.addFavorite(props.items));
     dispatch(favoriteActions.setFavorite());
-    setStyleToggle(styles.hidden);
     Alert.alert("Song has been added to favorites");
   };
 
-  const cartPress = async () => {
+  //CLICK CART ICON
+  const cartPress = () => {
+    // ITEM IS NOT IN CART OR PURCHASED
     if (itemInCart === false && itemInOrder === false) {
       dispatch(licenseActions.licenseInfo(props.items.id));
-      handleLicenseScreen();
-    }
-    if (itemInCart === true && itemInOrder === false) {
+      props.navigation.navigate({ routeName: "License" });
+      // ITEM IN CART NOT PURCHASED
+    } else if (itemInCart === true && itemInOrder === false) {
       dispatch(cartActions.removeFromCart(props.items));
       alert("Song has been removed from cart.");
+      // ITEM ALREADY PURCHASED
     } else if (itemInCart === false && itemInOrder === true) {
       Alert.alert(
         "Song has already been purchased.",
