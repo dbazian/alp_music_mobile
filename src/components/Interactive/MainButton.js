@@ -1,10 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const MainButton = (props) => {
   return (
@@ -13,8 +10,7 @@ const MainButton = (props) => {
       onPress={props.onPress}
       disabled={props.disabled}
       activeOpacity={0.5}
-      underlayColor="#fff"
-    >
+      underlayColor="#fff">
       <Text style={styles.text}>{props.name}</Text>
     </TouchableOpacity>
   );

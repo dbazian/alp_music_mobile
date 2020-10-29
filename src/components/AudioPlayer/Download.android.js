@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  TouchableOpacity,
-  PermissionsAndroid,
-  Alert,
-  Linking,
-} from "react-native";
+import { TouchableOpacity, PermissionsAndroid, Alert, Linking } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import RNFetchBlob from "rn-fetch-blob";
 import storage from "@react-native-firebase/storage";
@@ -18,11 +13,8 @@ const Download = (props) => {
 
   const downloadPermission = async () => {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-      );
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("permissions granted");
         const source = await storage().ref(props.audioFile).getDownloadURL();
         let dirs = RNFetchBlob.fs.dirs;
         setIsLoading(true);
@@ -40,20 +32,17 @@ const Download = (props) => {
           .then((res) => {
             console.log("file_download", res);
             setIsLoading(false);
-            Alert.alert(
-              "Your file is done downloading and added to Files/Audio!"
-            );
+            Alert.alert("Your file is done downloading and added to Files/Audio!");
           })
-          .catch((errorMessage) => {
+          .catch((error) => {
             setIsLoading(false);
-            console.log("error with downloading file", errorMessage);
-            Alert.alert(
-              "There was an error downloading file please try again later."
-            );
+            console.log("error with downloading file", error);
+            Alert.alert("There was an error downloading file please try again later.");
           });
       } else if (granted === PermissionsAndroid.RESULTS.DENIED) {
-        console.log("permission denied");
+        console.log("Permission denied");
       } else if (granted === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+        console.log("Never ask permissions again");
         Alert.alert(
           "In order to download this file you will need to accept permissions in your settings",
           "Do you wish to continue?",
@@ -64,7 +53,7 @@ const Download = (props) => {
             },
             {
               text: "Cancel",
-              onPress: () => console.log("cancelled"),
+              onPress: () => console.log("cancel opening settings"),
               style: "cancel",
             },
           ],
@@ -81,11 +70,7 @@ const Download = (props) => {
   }
   return (
     <TouchableOpacity onPress={downloadPermission}>
-      <FontAwesomeIcon
-        icon={faDownload}
-        size={hp("5%")}
-        color={Colors.primary}
-      />
+      <FontAwesomeIcon icon={faDownload} size={hp("5%")} color={Colors.primary} />
     </TouchableOpacity>
   );
 };

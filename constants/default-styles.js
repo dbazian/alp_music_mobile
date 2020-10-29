@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "./Colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 export default StyleSheet.create({
   formBox: {
@@ -19,11 +16,12 @@ export default StyleSheet.create({
     shadowColor: Colors.primary,
     shadowOpacity: 0.9,
     shadowOffset: { width: 0, height: 5 },
+    fontSize: hp("2.5%"),
+    fontFamily: "Raleway-Medium",
   },
-  fullCentered: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
-    width: "100%",
+  bodyText: {
+    fontFamily: "Raleway-Medium",
+    fontSize: hp("2%"),
+    color: "white",
   },
 });

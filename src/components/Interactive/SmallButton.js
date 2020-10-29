@@ -1,10 +1,8 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import Colors from "../../../constants/Colors";
+import BodyText from "../Texts/BodyText";
 
 const SmallButton = (props) => {
   return (
@@ -13,9 +11,8 @@ const SmallButton = (props) => {
       underlayColor="#fff"
       activeOpacity={0.5}
       onPress={props.onPress}
-      disabled={props.disabled}
-    >
-      <Text style={styles.text}>{props.name}</Text>
+      disabled={props.disabled}>
+      <BodyText>{props.name}</BodyText>
     </TouchableOpacity>
   );
 };
@@ -34,12 +31,6 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowOpacity: 0.8,
     shadowOffset: { width: 0, height: 5 },
-  },
-  text: {
-    textAlign: "center",
-    color: "white",
-    fontSize: hp("2%"),
-    fontFamily: "Raleway-Medium",
   },
 });
 

@@ -1,19 +1,11 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { Text } from "react-native";
+import DefaultStyles from "../../../constants/default-styles";
 
 const BodyText = (props) => (
-  <Text numberOfLines={2} style={styles.body}>
+  <Text numberOfLines={2} style={DefaultStyles.bodyText}>
     {props.children}
   </Text>
 );
-
-const styles = StyleSheet.create({
-  body: {
-    fontFamily: "Raleway-Medium",
-    fontSize: hp("2%"),
-    color: "white",
-  },
-});
 
 export default BodyText;

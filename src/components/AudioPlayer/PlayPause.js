@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
 import storage from "@react-native-firebase/storage";
-import {
-  audioPlaying,
-  stopPlay,
-  audioLoading,
-} from "../../../store/actions/playerActions";
+import { audioPlaying, stopPlay, audioLoading } from "../../../store/actions/playerActions";
 import { Audio } from "expo-av";
 import SmallIndicator from "../Indicators/SmallIndicator";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -16,12 +11,7 @@ import { faPlay, faPause } from "@fortawesome/pro-light-svg-icons";
 import Colors from "../../../constants/Colors";
 
 const PlayPause = (props) => {
-  const dispatch = useDispatch();
-
-  // LOAD FROM FIREBASE VARIABLES
-  let task = storage().ref(props.audioFile).getDownloadURL();
-
-  //HOOKS
+  const task = storage().ref(props.audioFile).getDownloadURL();
   const stopAudio = useSelector((state) => state.player.stopAudio);
   const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
   const isAudioLoading = useSelector((state) => state.player.isAudioLoading);
@@ -29,8 +19,8 @@ const PlayPause = (props) => {
   const [soundObject, setSoundObject] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [thisAudioPlaying, setThisAudioPlaying] = useState(false);
+  const dispatch = useDispatch();
 
-  // LOAD AUDIO SETTINGS
   useEffect(() => {
     const audioSettings = async () => {
       try {
@@ -43,14 +33,12 @@ const PlayPause = (props) => {
           staysActiveInBackground: false,
           playThroughEarpieceAndroid: true,
         });
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
       }
       audioSettings();
     };
   }, []);
-
-  // STOP AUDIO ON PAGE EXIT
 
   useEffect(() => {
     if (stopAudio === true && soundObject != null) {
@@ -62,7 +50,6 @@ const PlayPause = (props) => {
     }
   }, [stopAudio]);
 
-  // MOUNTING AND UNMOUNTING
   useEffect(() => {
     Audio.setIsEnabledAsync(true);
     return function cleanUp() {
@@ -76,19 +63,12 @@ const PlayPause = (props) => {
     };
   }, []);
 
-  // PLAY PAUSE TOGGLE
   const handlePlayPause = async () => {
     setIsLoading(true);
     Audio.setIsEnabledAsync(true);
     dispatch(stopPlay(false));
     let uri = await task;
-
-    //PLAY
-    if (
-      isAudioPlaying === false &&
-      thisAudioPlaying === false &&
-      isAudioLoading === false
-    ) {
+    if (isAudioPlaying === false && thisAudioPlaying === false && isAudioLoading === false) {
       dispatch(audioLoading(true));
       const soundObject = new Audio.Sound();
       await soundObject.loadAsync({ uri }, {}, true);
@@ -98,26 +78,14 @@ const PlayPause = (props) => {
       setThisAudioPlaying(true);
       dispatch(audioPlaying(true));
       setIconSwitch(faPause);
-
-      // PAUSE
-    } else if (
-      thisAudioPlaying === true &&
-      isAudioPlaying === true &&
-      isAudioLoading === false
-    ) {
+    } else if (thisAudioPlaying === true && isAudioPlaying === true && isAudioLoading === false) {
       soundObject.stopAsync();
       soundObject.unloadAsync();
       setSoundObject(null);
       dispatch(audioPlaying(false));
       setThisAudioPlaying(false);
       setIconSwitch(faPlay);
-
-      // STOP AND PLAY
-    } else if (
-      isAudioPlaying === true &&
-      thisAudioPlaying === false &&
-      isAudioLoading === false
-    ) {
+    } else if (isAudioPlaying === true && thisAudioPlaying === false && isAudioLoading === false) {
       dispatch(stopPlay(true));
       dispatch(audioLoading(true));
       const soundObject = new Audio.Sound();
@@ -128,16 +96,8 @@ const PlayPause = (props) => {
       dispatch(audioPlaying(true));
       setThisAudioPlaying(true);
       setIconSwitch(faPause);
-
-      // IF LOADING
-    } else if (
-      isAudioLoading === true &&
-      thisAudioPlaying === false &&
-      isAudioPlaying === false
-    ) {
-      Alert.alert(
-        "Wait for audio to finish loading before playing another track"
-      );
+    } else if (isAudioLoading === true && thisAudioPlaying === false && isAudioPlaying === false) {
+      Alert.alert("Wait for audio to finish loading before playing another track");
     }
     setIsLoading(false);
   };
@@ -148,11 +108,7 @@ const PlayPause = (props) => {
 
   return (
     <TouchableOpacity onPress={handlePlayPause}>
-      <FontAwesomeIcon
-        icon={iconSwitch}
-        size={hp("5%")}
-        color={Colors.primary}
-      />
+      <FontAwesomeIcon icon={iconSwitch} size={hp("5%")} color={Colors.primary} />
     </TouchableOpacity>
   );
 };

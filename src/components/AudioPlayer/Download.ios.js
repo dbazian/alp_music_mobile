@@ -25,11 +25,9 @@ const Download = (props) => {
         RNFetchBlob.ios.previewDocument(res.path());
         setIsLoading(false);
       })
-      .catch((e) => {
-        console.log(e);
-        Alert.alert(
-          "There was a problem downloading your file please try again later."
-        );
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("There was a problem downloading your file please try again later.");
         setIsLoading(false);
       });
     return;
@@ -40,11 +38,7 @@ const Download = (props) => {
   }
   return (
     <TouchableOpacity onPress={downloadSong}>
-      <FontAwesomeIcon
-        icon={faDownload}
-        size={hp("5%")}
-        color={Colors.primary}
-      />
+      <FontAwesomeIcon icon={faDownload} size={hp("5%")} color={Colors.primary} />
     </TouchableOpacity>
   );
 };

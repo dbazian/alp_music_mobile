@@ -1,16 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import AutoComplete from "react-native-autocomplete-input";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-const Input = (props) => {
+const SongInput = (props) => {
   return (
     <View style={styles.viewContainer}>
       <AutoComplete
-        style={[styles.formBox, props.style]}
+        style={styles.formBox}
         listStyle={styles.listStyle}
         autoCapitalize="none"
         autoCorrect={false}
@@ -32,7 +29,7 @@ const styles = StyleSheet.create({
   formBox: {
     backgroundColor: "white",
     textAlign: "center",
-    fontSize: hp("2.5%"),
+    fontSize: hp("2%"),
     fontFamily: "Raleway-Medium",
     height: hp("7%"),
     width: wp("95%"),
@@ -48,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Input;
+export default SongInput;

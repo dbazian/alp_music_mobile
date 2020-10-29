@@ -77,8 +77,6 @@ const UserNavigator = createStackNavigator(
   }
 );
 
-// BOTTOM NAVIGATION
-
 const AlpTabNavigator = createBottomTabNavigator(
   {
     User: {

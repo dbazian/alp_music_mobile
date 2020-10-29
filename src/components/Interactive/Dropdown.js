@@ -8,21 +8,13 @@ const useDropdown = (label, defaultState, options) => {
   const [selectedValue, setSelectedValue] = useState(defaultState);
 
   const DropdownMaker = (props) => (
-    <View style={[DefaultStyles.formBox, props.style]}>
+    <View style={DefaultStyles.formBox}>
       <RNPickerSelect
         style={{
-          inputIOS: {
-            fontSize: hp("2.5%"),
-            textAlign: "center",
-            fontFamily: "Raleway-Semibold",
-          },
-          inputAndroid: {
-            fontSize: hp("2%"),
-            textAlign: "center",
-            fontFamily: "Raleway-Semibold",
-          },
+          inputIOS: [DefaultStyles.bodyText],
+          inputAndroid: [DefaultStyles.bodyText],
           placeholder: {
-            fontSize: hp("2.3%"),
+            fontSize: hp("2%"),
             textAlign: "center",
             fontFamily: "Raleway-Semibold",
           },
@@ -36,7 +28,6 @@ const useDropdown = (label, defaultState, options) => {
       />
     </View>
   );
-
   return [selectedValue, DropdownMaker, setSelectedValue];
 };
 
