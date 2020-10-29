@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
-
+import HeaderText from "../Texts/HeaderText";
 const MainButton = (props) => {
   return (
     <TouchableOpacity
@@ -11,7 +11,7 @@ const MainButton = (props) => {
       disabled={props.disabled}
       activeOpacity={0.5}
       underlayColor="#fff">
-      <Text style={styles.text}>{props.name}</Text>
+      <HeaderText>{props.name}</HeaderText>
     </TouchableOpacity>
   );
 };
@@ -31,12 +31,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowOffset: { width: 0, height: wp("1%") },
     elevation: 3,
-  },
-  text: {
-    color: "white",
-    textAlign: "center",
-    fontSize: hp("3%"),
-    fontFamily: "Raleway-Medium",
   },
 });
 

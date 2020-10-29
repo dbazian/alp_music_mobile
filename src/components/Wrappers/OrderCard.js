@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-const Card = (props) => {
+const OrderCard = (props) => {
   return <View style={styles.container}>{props.children}</View>;
 };
 
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default OrderCard;

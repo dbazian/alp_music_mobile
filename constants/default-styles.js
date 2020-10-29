@@ -23,5 +23,33 @@ export default StyleSheet.create({
     fontFamily: "Raleway-Medium",
     fontSize: hp("2%"),
     color: "white",
+    textAlign: "center",
+    padding: 5,
+  },
+  bodyTextBlack: {
+    fontFamily: "Raleway-Medium",
+    fontSize: hp("2%"),
+    color: "black",
+    textAlign: "center",
+  },
+  SongText: {
+    fontFamily: "Raleway-Medium",
+    fontSize: hp("1.8%"),
+    color: "white",
+  },
+  cardIconContainer: {
+    flex: 2,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  cardTextContainer: {
+    flex: 2,
+    flexDirection: "row",
+  },
+  cardInnerContainer: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });

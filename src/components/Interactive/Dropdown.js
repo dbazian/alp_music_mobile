@@ -11,8 +11,8 @@ const useDropdown = (label, defaultState, options) => {
     <View style={DefaultStyles.formBox}>
       <RNPickerSelect
         style={{
-          inputIOS: [DefaultStyles.bodyText],
-          inputAndroid: [DefaultStyles.bodyText],
+          inputIOS: [DefaultStyles.bodyTextBlack],
+          inputAndroid: [DefaultStyles.bodyTextBlack],
           placeholder: {
             fontSize: hp("2%"),
             textAlign: "center",
