@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch } from "react-redux";
-
 import * as authActions from "../../store/actions/authActions";
-
 import FullIndicator from "../components/Indicators/FullIndicator";
 
 const StartupScreen = (props) => {
@@ -19,7 +17,6 @@ const StartupScreen = (props) => {
       const transformedData = JSON.parse(userData);
       const { token, userId, expDate } = transformedData;
       const expirationDate = new Date(expDate);
-
       if (expirationDate <= new Date() || !token || !userId) {
         props.navigation.navigate("Auth");
         return;

@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "react-native";
 import { useDispatch } from "react-redux";
-
 import { getSongs } from "../../store/actions/filterActions";
 import { stopPlay } from "../../store/actions/playerActions";
 import * as orderActions from "../../store/actions/orderActions";
 import * as authActions from "../../store/actions/authActions";
-
 import Gradient from "../components/Wrappers/Gradient";
 import Logo from "../components/Logos/Logo";
 import LogoText from "../components/Logos/LogoText";
 import Link from "../components/Texts/Link";
 import FullIndicator from "../components/Indicators/FullIndicator";
 import HeaderText from "../components/Texts/HeaderText";
-
 import InstructionsModal from "../modals/InstructionsModal";
 import HelpModal from "../modals/HelpModal";
 
@@ -22,15 +19,21 @@ const UserScreen = (props) => {
   const [helpModalToggle, setHelpModalToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setError(null);
+    setIsLoading(true);
+    loadProducts();
+    setIsLoading(false);
+  }, [dispatch]);
 
   const logout = () => {
     dispatch(authActions.logout());
   };
 
-  const orderNav = async () => {
-    await dispatch(stopPlay());
+  const orderNav = () => {
+    dispatch(stopPlay());
     props.navigation.navigate({ routeName: "Orders" });
   };
 
@@ -42,17 +45,7 @@ const UserScreen = (props) => {
     setHelpModalToggle(!helpModalToggle);
   };
 
-  useEffect(() => {
-    const loadAll = async () => {
-      setError(null);
-      setIsLoading(true);
-      await loadProducts();
-      setIsLoading(false);
-    };
-    loadAll();
-  }, [dispatch]);
-
-  const loadProducts = useCallback(async () => {
+  const loadProducts = useCallback(() => {
     try {
       dispatch(getSongs());
       dispatch(orderActions.setOrders());
@@ -65,11 +58,7 @@ const UserScreen = (props) => {
     return (
       <Gradient>
         <HeaderText>An error occured!</HeaderText>
-        <Button
-          title="Try Again"
-          onPress={loadProducts}
-          color={"white"}
-        ></Button>
+        <Button title="Try Again" onPress={loadProducts} color={"white"}></Button>
       </Gradient>
     );
   }
@@ -79,10 +68,7 @@ const UserScreen = (props) => {
   } else {
     return (
       <Gradient>
-        <InstructionsModal
-          visible={instructionModalToggle}
-          onPress={instructionModal}
-        />
+        <InstructionsModal visible={instructionModalToggle} onPress={instructionModal} />
         <HelpModal visible={helpModalToggle} onPress={helpModal} />
         <LogoText />
         <Link onPress={orderNav} title={"Orders"} />

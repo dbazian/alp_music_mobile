@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Text, Alert } from "react-native";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { filterSong, filterGenre, filterMood } from "../../store/actions/filterActions";
 import { stopPlay } from "../../store/actions/playerActions";
 import SongInput from "../components/Interactive/SongInput";
@@ -10,6 +9,7 @@ import MainButton from "../components/Interactive/MainButton";
 import HeaderText from "../components/Texts/HeaderText";
 import FullIndicator from "../components/Indicators/FullIndicator";
 import Gradient from "../components/Wrappers/Gradient";
+import DefaultStyles from "../../constants/default-styles";
 
 const SearchScreen = (props) => {
   const songData = useSelector((state) => state.filter.songData);
@@ -38,7 +38,7 @@ const SearchScreen = (props) => {
     });
     props.navigation.addListener("didFocus", () => {
       setIsLoading(true);
-      if (isAudioPlaying === true) {
+      if (isAudioPlaying) {
         dispatch(stopPlay(true));
       }
       setGenres([...new Set(songData.map((x) => x.genre))]);
@@ -47,13 +47,10 @@ const SearchScreen = (props) => {
     });
   }, []);
 
-  // ON GENRE CHANGE
   useEffect(() => {
-    if (selectedGenre === null) {
-      setGenres([...new Set(songData.map((x) => x.genre))]);
-    } else {
-      setMoods([...new Set(filteredSongs.map((x) => x.mood))]);
-    }
+    selectedGenre === null
+      ? setGenres([...new Set(songData.map((x) => x.genre))])
+      : setMoods([...new Set(filteredSongs.map((x) => x.mood))]);
     if (selectedGenre === undefined || selectedGenre === null) {
       setInputEnabled(true);
       setStyleToggle();
@@ -63,13 +60,10 @@ const SearchScreen = (props) => {
     }
   }, [selectedGenre]);
 
-  // ON MOOD CHANGE
   useEffect(() => {
-    if (selectedMood === null) {
-      setMoods([...new Set(songData.map((x) => x.mood))]);
-    } else {
-      setGenres([...new Set(filteredSongs.map((x) => x.genre))]);
-    }
+    selectedMood === null
+      ? setMoods([...new Set(songData.map((x) => x.mood))])
+      : setGenres([...new Set(filteredSongs.map((x) => x.genre))]);
     if (selectedMood === undefined || selectedMood === null) {
       setInputEnabled(true);
       setStyleToggle();
@@ -79,25 +73,19 @@ const SearchScreen = (props) => {
     }
   }, [selectedMood]);
 
-  // ON TEXT INPUT
   useEffect(() => {
     if (enteredSong.length === 0) {
       setHideResultsToggle(true);
       setDropdownDisabled(false);
       setDropdownStyle();
-    } else if (enteredSong.length > 1) {
+    } else {
       setHideResultsToggle(false);
       setDropdownDisabled(true);
       setDropdownStyle(styles.disabled);
     }
-    if (songData.some((name) => name.name === enteredSong)) {
-      setTextValid(true);
-    } else {
-      setTextValid(false);
-    }
+    songData.some((name) => name.name === enteredSong) ? setTextValid(true) : setTextValid(false);
   }, [enteredSong]);
 
-  // CHANGE HANDLERS
   const genreValueHandler = (itemValue) => {
     setSelectedGenre(itemValue);
     dispatch(filterGenre(itemValue));
@@ -113,16 +101,12 @@ const SearchScreen = (props) => {
     if (enteredSong.length === 0) {
       setNameList([...new Set(songData.map((x) => x.name))]);
       setTextValid(false);
-    } else if (enteredSong.length > 0) {
+    } else {
       const regex = new RegExp(`${enteredSong.trim()}`, "i");
       setNameList(nameList.filter((song) => song.search(regex) >= 0).reverse());
-    } else {
-      setNameList([...new Set(songData.map((x) => x.name))]);
-      setTextValid(false);
     }
   };
 
-  // ON SUBMIT
   const submitPress = () => {
     if (selectedGenre === null && selectedMood === null && enteredSong.length === 0) {
       Alert.alert("Please enter a song name or choose a filter.");
@@ -132,10 +116,8 @@ const SearchScreen = (props) => {
     }
   };
 
-  // TRIM AND LOWERCASE ENTERED TEXT AND NAME LIST
   const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
-  // ON KEYBOARD ENTER
   const onSubmitEditing = () => {
     if (textValid === true) {
       submitPress();
@@ -173,7 +155,7 @@ const SearchScreen = (props) => {
               onSubmitEditing={onSubmitEditing}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => setEnteredSong(item)} style={styles.touchable}>
-                  <Text style={styles.text}>{item}</Text>
+                  <Text style={DefaultStyles.bodyTextBlack}>{item}</Text>
                 </TouchableOpacity>
               )}
             />
@@ -203,26 +185,19 @@ const SearchScreen = (props) => {
 const styles = StyleSheet.create({
   centered: {
     alignItems: "center",
-    width: "100%",
     height: "100%",
+  },
+  search: {
+    alignItems: "center",
+    zIndex: 1,
   },
   disabled: {
     backgroundColor: "#D3D3D3",
-  },
-  text: {
-    color: "black",
-    fontSize: hp("2.5%"),
   },
   touchable: {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-  },
-  search: {
-    width: "100%",
-    alignItems: "center",
-    marginTop: 20,
-    zIndex: 1,
   },
   filter: {
     width: "100%",

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
 import SongItem from "../components/Items/SongItem";
@@ -21,7 +21,7 @@ const SongScreen = (props) => {
 
   useEffect(() => {
     props.navigation.addListener("didBlur", () => {
-      if (isAudioPlaying === true) {
+      if (isAudioPlaying) {
         dispatch(stopPlay(true));
       }
     });
@@ -58,15 +58,5 @@ const SongScreen = (props) => {
 };
 
 SongScreen.navigationOptions = { headerTitle: "Songs" };
-
-const styles = StyleSheet.create({
-  full: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "black",
-    height: "100%",
-    width: "100%",
-  },
-});
 
 export default SongScreen;

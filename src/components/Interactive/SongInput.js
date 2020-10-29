@@ -7,7 +7,7 @@ const SongInput = (props) => {
   return (
     <View style={styles.viewContainer}>
       <AutoComplete
-        style={styles.formBox}
+        style={[styles.formBox, props.style]}
         listStyle={styles.listStyle}
         autoCapitalize="none"
         autoCorrect={false}
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     position: "absolute",
+    alignItems: "center",
   },
   listStyle: {
     maxHeight: hp("10%"),

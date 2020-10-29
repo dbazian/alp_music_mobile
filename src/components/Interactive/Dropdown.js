@@ -8,7 +8,7 @@ const useDropdown = (label, defaultState, options) => {
   const [selectedValue, setSelectedValue] = useState(defaultState);
 
   const DropdownMaker = (props) => (
-    <View style={DefaultStyles.formBox}>
+    <View style={[DefaultStyles.formBox, props.style]}>
       <RNPickerSelect
         style={{
           inputIOS: [DefaultStyles.bodyTextBlack],
