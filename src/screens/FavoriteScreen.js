@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
-
 import FavoriteItem from "../components/Items/FavoriteItem";
 import MainButton from "../components/Interactive/MainButton";
 import HeaderText from "../components/Texts/HeaderText";
@@ -12,23 +11,22 @@ const FavoriteScreen = (props) => {
   const favoriteItems = useSelector((state) => state.favorite.favorites);
   const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
   const { goBack } = props.navigation;
-
   const dispatch = useDispatch();
-
-  const backPress = () => {
-    if (isAudioPlaying === true) {
-      dispatch(stopPlay(true));
-    }
-    goBack();
-  };
 
   useEffect(() => {
     props.navigation.addListener("didBlur", () => {
-      if (isAudioPlaying === true) {
+      if (isAudioPlaying) {
         dispatch(stopPlay(true));
       }
     });
   });
+
+  const backPress = () => {
+    if (isAudioPlaying) {
+      dispatch(stopPlay(true));
+    }
+    goBack();
+  };
 
   const toCart = () => {
     props.navigation.navigate({ routeName: "Cart" });
@@ -61,15 +59,5 @@ const FavoriteScreen = (props) => {
 };
 
 FavoriteScreen.navigationOptions = { headerTitle: "Favorites" };
-
-const styles = StyleSheet.create({
-  full: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "black",
-    height: "100%",
-    width: "100%",
-  },
-});
 
 export default FavoriteScreen;

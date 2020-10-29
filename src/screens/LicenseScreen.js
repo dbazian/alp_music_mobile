@@ -1,22 +1,21 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Alert, Linking } from "react-native";
+import { View, StyleSheet, Alert, Linking } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
 import { stopPlay } from "../../store/actions/playerActions";
 import * as cartActions from "../../store/actions/cartActions";
 import LicenseData from "../../data/LicenseData";
-
 import RadioForm from "react-native-simple-radio-button";
 import SmallButton from "../components/Interactive/SmallButton";
 import Gradient from "../components/Wrappers/Gradient";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import HeaderText from "../components/Texts/HeaderText";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import DefaultStyles from "../../constants/default-styles";
+import Colors from "../../constants/Colors";
 
 const LicenseScreen = (props) => {
   const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
   const songId = useSelector((state) => state.license.data);
+  const selectedSong = useSelector((state) => state.filter.songData.find((song) => song.id === songId));
   const dispatch = useDispatch();
   const { goBack } = props.navigation;
 
@@ -27,10 +26,6 @@ const LicenseScreen = (props) => {
       }
     });
   }, []);
-
-  const selectedSong = useSelector((state) =>
-    state.filter.songData.find((song) => song.id === songId)
-  );
 
   const purchaseSelector = (value, label) => {
     if (label === 0) {
@@ -49,9 +44,7 @@ const LicenseScreen = (props) => {
         },
       ]);
     } else {
-      Linking.openURL(
-        `https://alpmusic.sourceaudio.com/#!details?id=${songId}`
-      );
+      Linking.openURL(`https://alpmusic.sourceaudio.com/#!details?id=${songId}`);
       props.navigation.navigate({ routeName: "Songs" });
     }
   };
@@ -61,7 +54,7 @@ const LicenseScreen = (props) => {
     props.navigation.navigate({ routeName: "Songs" });
   };
 
-  const handleToCartPress = async () => {
+  const handleToCartPress = () => {
     dispatch(cartActions.addToCart(selectedSong));
     props.navigation.navigate({ routeName: "Songs" });
     props.navigation.navigate({ routeName: "Cart" });
@@ -69,23 +62,24 @@ const LicenseScreen = (props) => {
 
   return (
     <Gradient>
-      <View style={styles.container}>
-        <Text style={styles.text}>What will you be using this song for?</Text>
+      <View style={DefaultStyles.fullCentered}>
+        <HeaderText>Choose a license type</HeaderText>
         <RadioForm
           animation={true}
           buttonColor={"white"}
+          selectedButtonColor={"white"}
           radio_props={LicenseData}
           initial={-1}
           onPress={purchaseSelector}
           radioStyle={{
             alignItems: "center",
-            marginHorizontal: wp("8%"),
+            paddingVertical: 8,
+            paddingHorizontal: 20,
           }}
           buttonSize={hp("3%")}
           labelStyle={{
-            fontSize: wp("4.7%"),
-            padding: hp("1.5%"),
-            color: "white",
+            paddingVertical: 10,
+            paddingHorizontal: 20,
           }}
         />
         <View style={styles.bottomButton}>
@@ -97,20 +91,8 @@ const LicenseScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    opacity: 0.92,
-    height: hp("100%"),
-    width: wp("100%"),
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "white",
-    fontSize: hp("2.7%"),
-    marginBottom: hp("8%"),
-  },
   bottomButton: {
-    margin: hp("10%"),
+    margin: hp("3%"),
     width: wp("35%"),
   },
 });

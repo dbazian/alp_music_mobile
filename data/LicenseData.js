@@ -1,11 +1,14 @@
+import React from "react";
+import BodyText from "../src/components/Texts/BodyText";
+
 const LicenseData = [
   {
     value: 15.0,
-    label: "Non Commercial Use (Personal, Social Media and Video Channels)",
+    label: <BodyText>Non Commercial - {"\n"}Personal/Social Media</BodyText>,
   },
   {
     value: 0,
-    label: "Commercial Use (You will be redirected to our website.)",
+    label: <BodyText>Commercial - {"\n"}(Redirected to website.)</BodyText>,
   },
 ];
 

@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
 import { stopPlay } from "../../store/actions/playerActions";
-
 import SongItem from "../components/Items/SongItem";
 import MainButton from "../components/Interactive/MainButton";
 import HeaderText from "../components/Texts/HeaderText";
@@ -15,7 +13,7 @@ const SongScreen = (props) => {
   const { goBack } = props.navigation;
   const dispatch = useDispatch();
   const backPress = () => {
-    if (isAudioPlaying === true) {
+    if (isAudioPlaying) {
       dispatch(stopPlay(true));
     }
     goBack();

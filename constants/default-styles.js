@@ -56,4 +56,9 @@ export default StyleSheet.create({
     alignItems: "center",
     marginVertical: 40,
   },
+  fullCentered: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
