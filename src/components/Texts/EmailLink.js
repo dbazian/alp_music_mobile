@@ -15,10 +15,11 @@ const EmailLink = (props) => {
 const styles = StyleSheet.create({
   section: {
     marginVertical: 10,
+    alignItems: "center",
   },
   link: {
     color: "white",
-    fontSize: hp("2.5%"),
+    fontSize: hp("2.3%"),
     padding: 2,
     fontStyle: "italic",
     textDecorationLine: "underline",

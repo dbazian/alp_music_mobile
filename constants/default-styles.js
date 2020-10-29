@@ -52,4 +52,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+  buttonContainer: {
+    alignItems: "center",
+    marginVertical: 40,
+  },
 });
