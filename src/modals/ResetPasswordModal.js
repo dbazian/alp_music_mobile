@@ -3,7 +3,7 @@ import { Modal, Alert, ActivityIndicator } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import firebase from "../../InitializeFirebase";
 import HeaderText from "../components/Texts/HeaderText";
-import WarningText from "../components/Texts/WarningText";
+import BodyText from "../components/Texts/BodyText";
 import MainButton from "../components/Interactive/MainButton";
 import AuthInput from "../components/Interactive/AuthInput";
 import Gradient from "../components/Wrappers/Gradient";
@@ -60,7 +60,7 @@ const ResetPasswordModal = (props) => {
           rules={{ required: true, pattern: /^\S+@\S+$/i }}
           defaultValue=""
         />
-        {errors.email && <WarningText>Invalid Email!</WarningText>}
+        {errors.email && <BodyText>Invalid Email!</BodyText>}
         {isLoading ? (
           <ActivityIndicator size="large" colors={Colors.Primary} />
         ) : (

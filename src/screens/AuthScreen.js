@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-
 import * as authActions from "../../store/actions/authActions";
-
 import ResetPasswordModal from "../modals/ResetPasswordModal";
 import { BarIndicator } from "react-native-indicators";
 import Link from "../components/Texts/Link";
-import WarningText from "../components/Texts/WarningText";
+import BodyText from "../components/Texts/BodyText";
 import MainButton from "../components/Interactive/MainButton";
 import AuthInput from "../components/Interactive/AuthInput";
 import Gradient from "../components/Wrappers/Gradient";
@@ -81,7 +79,7 @@ const AuthScreen = (props) => {
             rules={{ required: true, pattern: /^\S+@\S+$/i }}
             defaultValue=""
           />
-          {errors.email && <WarningText>Invalid Email!</WarningText>}
+          {errors.email && <BodyText>Invalid Email!</BodyText>}
           <Controller
             control={control}
             render={({ onChange, onBlur, value }) => (
@@ -101,20 +99,14 @@ const AuthScreen = (props) => {
             rules={{ required: true, minLength: 6, maxLength: 12 }}
             defaultValue=""
           />
-          {errors.password && <WarningText>Invalid Password!</WarningText>}
+          {errors.password && <BodyText>Invalid Password!</BodyText>}
         </View>
         {isLoading ? (
           <BarIndicator color="white" count={5} />
         ) : (
-          <MainButton
-            name={isSignup ? "Sign up" : "Login"}
-            onPress={handleSubmit(onSubmit)}
-          />
+          <MainButton name={isSignup ? "Sign up" : "Login"} onPress={handleSubmit(onSubmit)} />
         )}
-        <Link
-          title={isSignup ? "Switch to log in" : "Switch to sign up."}
-          onPress={signupToggle}
-        />
+        <Link title={isSignup ? "Switch to log in" : "Switch to sign up."} onPress={signupToggle} />
         <Link title={"Forgot Password"} onPress={passwordModal} />
         <Logo />
       </Gradient>

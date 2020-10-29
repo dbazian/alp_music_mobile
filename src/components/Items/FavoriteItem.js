@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as cartActions from "../../../store/actions/cartActions";
 import * as licenseActions from "../../../store/actions/licenseAction";
 import * as favoriteActions from "../../../store/actions/favoriteActions";
-import BodyText from "../Texts/BodyText";
+import SongText from "../Texts/SongText";
 import SongCard from "../Wrappers/SongCard";
 import PlayPause from "../AudioPlayer/PlayPause";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
@@ -69,7 +69,7 @@ const FavoriteItem = (props) => {
     <SongCard>
       <View style={DefaultStyles.cardInnerContainer}>
         <View style={DefaultStyles.cardTextContainer}>
-          <BodyText>{props.items.name}</BodyText>
+          <SongText>{props.items.name}</SongText>
         </View>
         <View style={DefaultStyles.cardIconContainer}>
           <PlayPause audioFile={props.items.audio} />
