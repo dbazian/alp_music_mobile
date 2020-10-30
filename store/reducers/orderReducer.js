@@ -13,12 +13,7 @@ export default (state = initialState, action) => {
       };
 
     case ADD_ORDER: {
-      const newOrder = new OrderModel(
-        action.orders.id,
-        action.orders.items,
-        action.orders.amount,
-        action.orders.date
-      );
+      const newOrder = new OrderModel(action.orders.id, action.orders.items, action.orders.amount, action.orders.date);
       return {
         ...state,
         orders: state.orders.concat(newOrder),

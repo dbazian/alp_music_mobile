@@ -1,8 +1,4 @@
-import {
-  AUDIO_PLAYING,
-  STOP_PLAY,
-  AUDIO_LOADING,
-} from "../actions/playerActions";
+import { AUDIO_PLAYING, STOP_PLAY, AUDIO_LOADING } from "../actions/playerActions";
 
 const initialState = {
   isAudioPlaying: false,

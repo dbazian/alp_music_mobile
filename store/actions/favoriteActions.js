@@ -10,12 +10,9 @@ export const addFavorite = (favoriteItems) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     await axios
-      .post(
-        `https://alp-music.firebaseio.com/favorites/${userId}.json?auth=${token}`,
-        {
-          favoriteItems,
-        }
-      )
+      .post(`https://alp-music.firebaseio.com/favorites/${userId}.json?auth=${token}`, {
+        favoriteItems,
+      })
       .then((response) => {
         dispatch({
           type: ADD_FAVORITE,
@@ -77,9 +74,7 @@ export const removeFavorite = (fid) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     await axios
-      .delete(
-        `https://alp-music.firebaseio.com/favorites/${userId}/${fid}.json?auth=${token}`
-      )
+      .delete(`https://alp-music.firebaseio.com/favorites/${userId}/${fid}.json?auth=${token}`)
       .then(() => {
         dispatch({ type: REMOVE_FAVORITE });
       })

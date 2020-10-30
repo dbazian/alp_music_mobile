@@ -38,9 +38,7 @@ export const resetFilters = () => {
 export const getSongs = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(
-        "https://alp-music.firebaseio.com/songs.json"
-      );
+      const response = await fetch("https://alp-music.firebaseio.com/songs.json");
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }

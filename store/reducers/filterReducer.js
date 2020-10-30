@@ -1,10 +1,4 @@
-import {
-  FILTER_SONG,
-  FILTER_GENRE,
-  RESET_FILTERS,
-  FILTER_MOOD,
-  GET_SONGS,
-} from "../actions/filterActions";
+import { FILTER_SONG, FILTER_GENRE, RESET_FILTERS, FILTER_MOOD, GET_SONGS } from "../actions/filterActions";
 
 const initialState = {
   songData: [],
@@ -34,11 +28,7 @@ const filterReducer = (state = initialState, action) => {
         if (selectedMood != song.mood && selectedMood != null) {
           return false;
         }
-        if (
-          enteredSong != song.name &&
-          selectedMood === null &&
-          selectedGenre == null
-        ) {
+        if (enteredSong != song.name && selectedMood === null && selectedGenre == null) {
           return false;
         }
         {

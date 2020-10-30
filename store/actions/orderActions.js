@@ -10,14 +10,11 @@ export const addOrder = (cartItems, totalAmount) => {
     const userId = getState().auth.userId;
     const date = new Date();
     await axios
-      .post(
-        `https://alp-music.firebaseio.com/orders/${userId}.json?auth=${token}`,
-        {
-          cartItems,
-          totalAmount,
-          date: date.toISOString(),
-        }
-      )
+      .post(`https://alp-music.firebaseio.com/orders/${userId}.json?auth=${token}`, {
+        cartItems,
+        totalAmount,
+        date: date.toISOString(),
+      })
       .then((response) => {
         dispatch({
           type: ADD_ORDER,
@@ -52,12 +49,7 @@ export const setOrders = () => {
         const loadedOrders = [];
         for (const key in resData) {
           loadedOrders.push(
-            new OrderModel(
-              key,
-              resData[key].cartItems,
-              resData[key].totalAmount,
-              new Date(resData[key].date)
-            )
+            new OrderModel(key, resData[key].cartItems, resData[key].totalAmount, new Date(resData[key].date))
           );
         }
         dispatch({ type: SET_ORDERS, orders: loadedOrders });

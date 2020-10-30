@@ -1,8 +1,4 @@
-import {
-  ADD_FAVORITE,
-  SET_FAVORITE,
-  REMOVE_FAVORITE,
-} from "../actions/favoriteActions";
+import { ADD_FAVORITE, SET_FAVORITE, REMOVE_FAVORITE } from "../actions/favoriteActions";
 import FavoriteModel from "../../models/FavoriteModel";
 
 const initialState = {
@@ -31,9 +27,7 @@ export default (state = initialState, action) => {
     case REMOVE_FAVORITE:
       return {
         ...state,
-        favorites: state.favorites.filter(
-          (favorite) => favorite.fid !== action.fid
-        ),
+        favorites: state.favorites.filter((favorite) => favorite.fid !== action.fid),
       };
   }
   return state;
