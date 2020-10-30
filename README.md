@@ -15,8 +15,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="./assets/logo-text.png" alt="Logo" width="200" height="80">
+  <a>
+    <img src="./assets/logo-image.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">ALP Music Mobile</h3>
@@ -30,6 +30,12 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+
+<img src="./assets/login-ss.png" alt="Login Screenshot" height="50%">
+<img src="./assets/filters-ss.png" alt="Login Screenshot" height="50%">
+<img src="./assets/songs-ss.png" alt="Login Screenshot" height="50%">
+<img src="./assets/orders-ss.png" alt="Login Screenshot" height="50%">
+<img src="./assets/di-ss.png" alt="Login Screenshot" height="50%">
 
 ### Built With
 
