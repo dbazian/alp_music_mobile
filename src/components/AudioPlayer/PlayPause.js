@@ -22,6 +22,7 @@ const PlayPause = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    Audio.setIsEnabledAsync(true);
     const audioSettings = async () => {
       try {
         await Audio.setAudioModeAsync({
@@ -38,6 +39,15 @@ const PlayPause = (props) => {
       }
       audioSettings();
     };
+    return function cleanUp() {
+      Audio.setIsEnabledAsync(false);
+      setThisAudioPlaying(false);
+      dispatch(audioPlaying(false));
+      dispatch(stopPlay(false));
+      dispatch(audioLoading(false));
+      setSoundObject(null);
+      setIconSwitch(faPlay);
+    };
   }, []);
 
   useEffect(() => {
@@ -49,19 +59,6 @@ const PlayPause = (props) => {
       dispatch(stopPlay(false));
     }
   }, [stopAudio]);
-
-  useEffect(() => {
-    Audio.setIsEnabledAsync(true);
-    return function cleanUp() {
-      Audio.setIsEnabledAsync(false);
-      setThisAudioPlaying(false);
-      dispatch(audioPlaying(false));
-      dispatch(stopPlay(false));
-      dispatch(audioLoading(false));
-      setSoundObject(null);
-      setIconSwitch(faPlay);
-    };
-  }, []);
 
   const handlePlayPause = async () => {
     setIsLoading(true);
