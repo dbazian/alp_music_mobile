@@ -31,11 +31,13 @@
 
 ## About The Project
 
-<img src="./assets/login-ss.png" alt="Login Screenshot" height="50%">
-<img src="./assets/filters-ss.png" alt="Login Screenshot" height="50%">
-<img src="./assets/songs-ss.png" alt="Login Screenshot" height="50%">
-<img src="./assets/orders-ss.png" alt="Login Screenshot" height="50%">
-<img src="./assets/di-ss.png" alt="Login Screenshot" height="50%">
+<div align-"center">
+<img src="./assets/login-ss.png" alt="Login Screenshot" width="20%">
+<img src="./assets/filters-ss.png" alt="Login Screenshot" width="20%">
+<img src="./assets/songs-ss.png" alt="Login Screenshot" width="20%">
+<img src="./assets/orders-ss.png" alt="Login Screenshot" width="20%">
+<img src="./assets/di-ss.png" alt="Login Screenshot" width="20%">
+</div>
 
 ### Built With
 

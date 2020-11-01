@@ -119,7 +119,7 @@ const SearchScreen = (props) => {
   const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
 
   const onSubmitEditing = () => {
-    if (textValid === true) {
+    if (textValid) {
       submitPress();
     } else if (textValid === false && nameList.length === 0) {
       Alert.alert("Not a valid song name, please try again.");

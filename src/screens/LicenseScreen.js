@@ -10,7 +10,6 @@ import Gradient from "../components/Wrappers/Gradient";
 import HeaderText from "../components/Texts/HeaderText";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import DefaultStyles from "../../constants/default-styles";
-import Colors from "../../constants/Colors";
 
 const LicenseScreen = (props) => {
   const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
