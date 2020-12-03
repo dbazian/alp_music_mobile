@@ -10,18 +10,24 @@ import SongCard from "../Wrappers/SongCard";
 import PlayPause from "../AudioPlayer/PlayPause";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faShoppingCart, faTrash, faDownload } from "@fortawesome/pro-light-svg-icons";
+import {
+  faShoppingCart,
+  faTrash,
+  faDownload,
+} from "@fortawesome/pro-light-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Colors from "../../../constants/Colors";
 import DefaultStyles from "../../../constants/default-styles";
 
-const FavoriteItem = (props) => {
+const FavoriteItem = props => {
   const [iconSwitch, setIconSwitch] = useState(faShoppingCart);
-  const itemInCart = useSelector((state) =>
-    Object.keys(state.cart.items).some((id) => parseInt(id) === props.items.id)
+  const itemInCart = useSelector(state =>
+    Object.keys(state.cart.items).some(id => parseInt(id) === props.items.id)
   );
-  const itemInOrder = useSelector((state) =>
-    state.order.orders.some((song) => song.items.some((id) => id.id === props.items.id))
+  const itemInOrder = useSelector(state =>
+    state.order.orders.some(song =>
+      song.items.some(id => id.id === props.items.id)
+    )
   );
   const dispatch = useDispatch();
 
@@ -39,8 +45,10 @@ const FavoriteItem = (props) => {
     }
   });
 
-  const favoritesPress = () => {
-    dispatch(favoriteActions.removeFavorite(props.items.fid));
+  console.log(props.items.fid);
+
+  const favoritesPress = async () => {
+    await dispatch(favoriteActions.removeFavorite(props.items.fid));
     dispatch(favoriteActions.setFavorite());
   };
 
@@ -52,16 +60,20 @@ const FavoriteItem = (props) => {
       dispatch(cartActions.removeFromCart(props.items));
       Alert.alert("Song has been removed from cart.");
     } else if (itemInCart === false && itemInOrder === true) {
-      Alert.alert("Song has already been purchased.", "Proceed to orders for download", [
-        {
-          text: "Ok",
-          onPress: () => props.navigation.navigate({ routeName: "Orders" }),
-        },
-        {
-          text: "Cancel",
-          onPress: () => console.log("cancel navigation to orders"),
-        },
-      ]);
+      Alert.alert(
+        "Song has already been purchased.",
+        "Proceed to orders for download",
+        [
+          {
+            text: "Ok",
+            onPress: () => props.navigation.navigate({ routeName: "Orders" }),
+          },
+          {
+            text: "Cancel",
+            onPress: () => console.log("cancel navigation to orders"),
+          },
+        ]
+      );
     }
   };
 
@@ -74,10 +86,18 @@ const FavoriteItem = (props) => {
         <View style={DefaultStyles.cardIconContainer}>
           <PlayPause audioFile={props.items.audio} />
           <TouchableOpacity onPress={cartPress}>
-            <FontAwesomeIcon icon={iconSwitch} size={hp("5%")} color={Colors.primary} />
+            <FontAwesomeIcon
+              icon={iconSwitch}
+              size={hp("5%")}
+              color={Colors.primary}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={favoritesPress}>
-            <FontAwesomeIcon icon={faStar} size={hp("5%")} color={Colors.primary} />
+            <FontAwesomeIcon
+              icon={faStar}
+              size={hp("5%")}
+              color={Colors.primary}
+            />
           </TouchableOpacity>
         </View>
       </View>

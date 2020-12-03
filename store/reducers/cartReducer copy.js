@@ -18,16 +18,10 @@ export default (state = initialState, action) => {
       const songAudio = addedSong.audio;
       const songPrice = addedSong.price;
       const songLicense = addedSong.licenseType;
+
       let newCartItem;
-      newCartItem = new CartModel(
-        songId,
-        songName,
-        songGenre,
-        songMood,
-        songAudio,
-        songPrice,
-        songLicense
-      );
+
+      newCartItem = new CartModel(songId, songName, songGenre, songMood, songAudio, songPrice, songLicense);
       return {
         ...state,
         items: { ...state.items, [addedSong.id]: newCartItem },

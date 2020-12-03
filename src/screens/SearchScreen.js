@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Text, Alert } from "react-native";
-import { filterSong, filterGenre, filterMood } from "../../store/actions/filterActions";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from "react-native";
+import {
+  filterSong,
+  filterGenre,
+  filterMood,
+} from "../../store/actions/filterActions";
 import { stopPlay } from "../../store/actions/playerActions";
 import SongInput from "../components/Interactive/SongInput";
 import useDropdown from "../components/Interactive/Dropdown";
@@ -11,14 +23,22 @@ import FullIndicator from "../components/Indicators/FullIndicator";
 import Gradient from "../components/Wrappers/Gradient";
 import DefaultStyles from "../../constants/default-styles";
 
-const SearchScreen = (props) => {
-  const songData = useSelector((state) => state.filter.songData);
-  const filteredSongs = useSelector((state) => state.filter.filteredSongs);
-  const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
+const SearchScreen = props => {
+  const songData = useSelector(state => state.filter.songData);
+  const filteredSongs = useSelector(state => state.filter.filteredSongs);
+  const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
   const [genres, setGenres] = useState([]);
-  const [selectedGenre, GenreDropdown, setSelectedGenre] = useDropdown("Genre", null, genres);
+  const [selectedGenre, GenreDropdown, setSelectedGenre] = useDropdown(
+    "Genre",
+    null,
+    genres
+  );
   const [moods, setMoods] = useState([]);
-  const [selectedMood, MoodDropdown, setSelectedMood] = useDropdown("Mood", null, moods);
+  const [selectedMood, MoodDropdown, setSelectedMood] = useDropdown(
+    "Mood",
+    null,
+    moods
+  );
   const [enteredSong, setEnteredSong] = useState("");
   const [hideResultsToggle, setHideResultsToggle] = useState(true);
   const [nameList, setNameList] = useState([]);
@@ -41,16 +61,16 @@ const SearchScreen = (props) => {
       if (isAudioPlaying) {
         dispatch(stopPlay(true));
       }
-      setGenres([...new Set(songData.map((x) => x.genre))]);
-      setMoods([...new Set(songData.map((x) => x.mood))]);
+      setGenres([...new Set(songData.map(x => x.genre))]);
+      setMoods([...new Set(songData.map(x => x.mood))]);
       setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     selectedGenre === null
-      ? setGenres([...new Set(songData.map((x) => x.genre))])
-      : setMoods([...new Set(filteredSongs.map((x) => x.mood))]);
+      ? setGenres([...new Set(songData.map(x => x.genre))])
+      : setMoods([...new Set(filteredSongs.map(x => x.mood))]);
     if (selectedGenre === undefined || selectedGenre === null) {
       setInputEnabled(true);
       setStyleToggle();
@@ -62,8 +82,8 @@ const SearchScreen = (props) => {
 
   useEffect(() => {
     selectedMood === null
-      ? setMoods([...new Set(songData.map((x) => x.mood))])
-      : setGenres([...new Set(filteredSongs.map((x) => x.genre))]);
+      ? setMoods([...new Set(songData.map(x => x.mood))])
+      : setGenres([...new Set(filteredSongs.map(x => x.genre))]);
     if (selectedMood === undefined || selectedMood === null) {
       setInputEnabled(true);
       setStyleToggle();
@@ -83,32 +103,38 @@ const SearchScreen = (props) => {
       setDropdownDisabled(true);
       setDropdownStyle(styles.disabled);
     }
-    songData.some((name) => name.name === enteredSong) ? setTextValid(true) : setTextValid(false);
+    songData.some(name => name.name === enteredSong)
+      ? setTextValid(true)
+      : setTextValid(false);
   }, [enteredSong]);
 
-  const genreValueHandler = (itemValue) => {
+  const genreValueHandler = itemValue => {
     setSelectedGenre(itemValue);
     dispatch(filterGenre(itemValue));
   };
 
-  const moodValueHandler = (itemValue) => {
+  const moodValueHandler = itemValue => {
     setSelectedMood(itemValue);
     dispatch(filterMood(itemValue));
   };
 
-  const songSearchHandler = (itemValue) => {
+  const songSearchHandler = itemValue => {
     setEnteredSong(itemValue.replace(/[^\w\s]/gi, ""));
     if (enteredSong.length === 0) {
-      setNameList([...new Set(songData.map((x) => x.name))]);
+      setNameList([...new Set(songData.map(x => x.name))]);
       setTextValid(false);
     } else {
       const regex = new RegExp(`${enteredSong.trim()}`, "i");
-      setNameList(nameList.filter((song) => song.search(regex) >= 0).reverse());
+      setNameList(nameList.filter(song => song.search(regex) >= 0).reverse());
     }
   };
 
   const submitPress = () => {
-    if (selectedGenre === null && selectedMood === null && enteredSong.length === 0) {
+    if (
+      selectedGenre === null &&
+      selectedMood === null &&
+      enteredSong.length === 0
+    ) {
       Alert.alert("Please enter a song name or choose a filter.");
     } else {
       dispatch(filterSong(enteredSong, selectedGenre, selectedMood));
@@ -124,7 +150,11 @@ const SearchScreen = (props) => {
     } else if (textValid === false && nameList.length === 0) {
       Alert.alert("Not a valid song name, please try again.");
       setEnteredSong("");
-    } else if (textValid === false && nameList.length > 0 && enteredSong.length > 0) {
+    } else if (
+      textValid === false &&
+      nameList.length > 0 &&
+      enteredSong.length > 0
+    ) {
       setEnteredSong(nameList[0]);
     }
     setHideResultsToggle(true);
@@ -144,9 +174,13 @@ const SearchScreen = (props) => {
           <HeaderText>Song Name:</HeaderText>
           <View style={styles.search}>
             <SongInput
-              keyExtractor={(item) => item.toString()}
+              keyExtractor={item => item.toString()}
               style={styleToggle}
-              data={nameList.length === 1 && comp(enteredSong, nameList[0]) ? [] : nameList}
+              data={
+                nameList.length === 1 && comp(enteredSong, nameList[0])
+                  ? []
+                  : nameList
+              }
               value={enteredSong}
               onChangeText={songSearchHandler}
               placeholder={"Enter Song Name"}
@@ -154,7 +188,9 @@ const SearchScreen = (props) => {
               hideResults={hideResultsToggle}
               onSubmitEditing={onSubmitEditing}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => setEnteredSong(item)} style={styles.touchable}>
+                <TouchableOpacity
+                  onPress={() => setEnteredSong(item)}
+                  style={styles.touchable}>
                   <Text style={DefaultStyles.bodyTextBlack}>{item}</Text>
                 </TouchableOpacity>
               )}

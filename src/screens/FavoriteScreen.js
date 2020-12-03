@@ -7,9 +7,9 @@ import MainButton from "../components/Interactive/MainButton";
 import HeaderText from "../components/Texts/HeaderText";
 import Gradient from "../components/Wrappers/Gradient";
 
-const FavoriteScreen = (props) => {
-  const favoriteItems = useSelector((state) => state.favorite.favorites);
-  const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
+const FavoriteScreen = props => {
+  const favoriteItems = useSelector(state => state.favorite.favorites);
+  const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
   const { goBack } = props.navigation;
   const dispatch = useDispatch();
 
@@ -46,11 +46,11 @@ const FavoriteScreen = (props) => {
           onPress={toCart}
           removeClippedSubviews={false}
           windowSize={100}
-          keyExtractor={(item) => item.fid}
+          keyExtractor={item => item.key}
           maxToRenderPerBatch={15}
           initialNumToRender={8}
           data={favoriteItems}
-          renderItem={(itemData) => <FavoriteItem items={itemData.item} />}
+          renderItem={itemData => <FavoriteItem items={itemData.item} />}
         />
         <MainButton name={"Back"} onPress={backPress} />
       </Gradient>
