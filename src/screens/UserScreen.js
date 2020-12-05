@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Iaphub from "react-native-iaphub";
 import { getSongs } from "../../store/actions/filterActions";
 import { stopPlay } from "../../store/actions/playerActions";
 import * as orderActions from "../../store/actions/orderActions";
@@ -14,13 +15,14 @@ import HeaderText from "../components/Texts/HeaderText";
 import InstructionsModal from "../modals/InstructionsModal";
 import HelpModal from "../modals/HelpModal";
 
-const UserScreen = (props) => {
+const UserScreen = props => {
+  const user = useSelector(state => state.auth.userId);
   const [instructionModalToggle, setInstructionModalToggle] = useState(false);
   const [helpModalToggle, setHelpModalToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const dispatch = useDispatch();
-
+  console.log(Iaphub.userId);
   useEffect(() => {
     setError(null);
     setIsLoading(true);
@@ -37,6 +39,11 @@ const UserScreen = (props) => {
     props.navigation.navigate({ routeName: "Orders" });
   };
 
+  const tokenScreen = () => {
+    dispatch(stopPlay());
+    props.navigation.navigate({ routeName: "Tokens" });
+  };
+
   const instructionModal = () => {
     setInstructionModalToggle(!instructionModalToggle);
   };
@@ -45,11 +52,13 @@ const UserScreen = (props) => {
     setHelpModalToggle(!helpModalToggle);
   };
 
-  const loadProducts = useCallback(() => {
+  const loadProducts = useCallback(async () => {
     try {
+      await Iaphub.setUserId(user);
       dispatch(getSongs());
       dispatch(orderActions.setOrders());
     } catch (error) {
+      console.log("error loading products");
       setError(error.message);
     }
   });
@@ -58,7 +67,10 @@ const UserScreen = (props) => {
     return (
       <Gradient>
         <HeaderText>An error occured!</HeaderText>
-        <Button title="Try Again" onPress={loadProducts} color={"white"}></Button>
+        <Button
+          title="Try Again"
+          onPress={loadProducts}
+          color={"white"}></Button>
       </Gradient>
     );
   }
@@ -68,9 +80,13 @@ const UserScreen = (props) => {
   } else {
     return (
       <Gradient>
-        <InstructionsModal visible={instructionModalToggle} onPress={instructionModal} />
+        <InstructionsModal
+          visible={instructionModalToggle}
+          onPress={instructionModal}
+        />
         <HelpModal visible={helpModalToggle} onPress={helpModal} />
         <LogoText />
+        <Link onPress={tokenScreen} title={"Purchase Tokens"} />
         <Link onPress={orderNav} title={"Orders"} />
         <Link onPress={instructionModal} title={"Download Instructions"} />
         <Link onPress={helpModal} title={"Help"} />

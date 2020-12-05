@@ -51,6 +51,8 @@
     "react-native-fontawesome-pro": "^2.1.0",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-hook-form": "^1.0.12",
+    "react-native-iap": "4.6.3",
+    "react-native-iaphub": "5.1.0",
     "react-native-indicators": "^0.17.0",
     "react-native-localize": "^1.4.0",
     "react-native-modal-selector": "^2.0.2",

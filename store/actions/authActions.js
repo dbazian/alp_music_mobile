@@ -1,19 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import Iaphub from "react-native-iaphub";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
 
 let timer;
 
 export const authenticate = (userId, token, expTime) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(setLogoutTimer(expTime));
     dispatch({ type: AUTHENTICATE, userId: userId, token: token });
   };
 };
 
-export const signup = (data) => {
-  return async (dispatch) => {
+export const signup = data => {
+  return async dispatch => {
     const response = await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxdPMR8SIE8HjRMuXLeHsdeXf1vK1UO_c",
       {
@@ -40,14 +40,22 @@ export const signup = (data) => {
     }
 
     const resData = await response.json();
-    dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
-    const expirationDate = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000);
+    dispatch(
+      authenticate(
+        resData.localId,
+        resData.idToken,
+        parseInt(resData.expiresIn) * 1000
+      )
+    );
+    const expirationDate = new Date(
+      new Date().getTime() + parseInt(resData.expiresIn) * 1000
+    );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
   };
 };
 
-export const login = (data) => {
-  return async (dispatch) => {
+export const login = data => {
+  return async dispatch => {
     const response = await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCxdPMR8SIE8HjRMuXLeHsdeXf1vK1UO_c",
       {
@@ -75,14 +83,24 @@ export const login = (data) => {
     }
 
     const resData = await response.json();
-    dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
-    const expirationDate = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000);
+    dispatch(
+      authenticate(
+        resData.localId,
+        resData.idToken,
+        parseInt(resData.expiresIn) * 1000
+      )
+    );
+
+    const expirationDate = new Date(
+      new Date().getTime() + parseInt(resData.expiresIn) * 1000
+    );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
   };
 };
 
 export const logout = () => {
   clearLogoutTimer();
+  Iaphub.setUserId(null);
   AsyncStorage.removeItem("userData");
   return { type: LOGOUT };
 };
@@ -93,15 +111,15 @@ const clearLogoutTimer = () => {
   }
 };
 
-const setLogoutTimer = (expirationTime) => {
-  return (dispatch) => {
+const setLogoutTimer = expirationTime => {
+  return dispatch => {
     timer = setTimeout(() => {
       dispatch(logout());
     }, expirationTime);
   };
 };
 
-const saveDataToStorage = (token, userId, expirationDate) => {
+const saveDataToStorage = async (token, userId, expirationDate) => {
   AsyncStorage.setItem(
     "userData",
     JSON.stringify({

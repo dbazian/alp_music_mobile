@@ -10,6 +10,7 @@ import AuthScreen from "../src/screens/AuthScreen";
 import StartupScreen from "../src/screens/StartupScreen";
 import PaymentScreen from "../src/screens/PaymentScreen";
 import OrderScreen from "../src/screens/OrderScreen";
+import TokensScreen from "../src/screens/TokensScreen";
 import LicenseScreen from "../src/screens/LicenseScreen";
 import FavoriteScreen from "../src/screens/FavoriteScreen";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -66,6 +67,7 @@ const UserNavigator = createStackNavigator(
   {
     User: UserScreen,
     Orders: OrderScreen,
+    Tokens: TokensScreen,
   },
   {
     defaultNavigationOptions: {
@@ -82,7 +84,7 @@ const AlpTabNavigator = createBottomTabNavigator(
     User: {
       screen: UserNavigator,
       navigationOptions: {
-        tabBarIcon: (tabInfo) => {
+        tabBarIcon: tabInfo => {
           return (
             <FontAwesomeIcon
               icon={faUser}
@@ -96,7 +98,7 @@ const AlpTabNavigator = createBottomTabNavigator(
     Search: {
       screen: SearchNavigator,
       navigationOptions: {
-        tabBarIcon: (tabInfo) => {
+        tabBarIcon: tabInfo => {
           return (
             <FontAwesomeIcon
               icon={faSearch}
@@ -111,7 +113,7 @@ const AlpTabNavigator = createBottomTabNavigator(
     Cart: {
       screen: CartNavigator,
       navigationOptions: {
-        tabBarIcon: (tabInfo) => {
+        tabBarIcon: tabInfo => {
           return (
             <FontAwesomeIcon
               icon={faShoppingCart}

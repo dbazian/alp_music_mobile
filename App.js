@@ -5,6 +5,7 @@ import { enableScreens } from "react-native-screens";
 import reduxThunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import Iaphub from "react-native-iaphub";
 import { composeWithDevTools } from "redux-devtools-extension";
 import * as SplashScreen from "expo-splash-screen";
 import filterReducer from "./store/reducers/filterReducer";
@@ -36,6 +37,11 @@ function App() {
 
   useEffect(() => {
     const prepareResources = async () => {
+      await Iaphub.init({
+        appId: "5fc904782e29380e8a1bb226",
+        apiKey: "d7u2uIGQpoQ23U8lBTC1Oui5vcw8Ku",
+        environment: "Development",
+      });
       await Font.loadAsync({
         "Raleway-Medium": require("./assets/fonts/Raleway-Medium.ttf"),
         "Raleway-Bold": require("./assets/fonts/Raleway-Bold.ttf"),
