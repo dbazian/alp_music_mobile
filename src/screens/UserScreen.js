@@ -6,6 +6,7 @@ import { getSongs } from "../../store/actions/filterActions";
 import { stopPlay } from "../../store/actions/playerActions";
 import * as orderActions from "../../store/actions/orderActions";
 import * as authActions from "../../store/actions/authActions";
+import { setToken } from "../../store/actions/tokenActions";
 import Gradient from "../components/Wrappers/Gradient";
 import Logo from "../components/Logos/Logo";
 import LogoText from "../components/Logos/LogoText";
@@ -22,7 +23,6 @@ const UserScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const dispatch = useDispatch();
-  console.log(Iaphub.userId);
   useEffect(() => {
     setError(null);
     setIsLoading(true);
@@ -54,7 +54,7 @@ const UserScreen = props => {
 
   const loadProducts = useCallback(async () => {
     try {
-      await Iaphub.setUserId(user);
+      //dispatch(setToken());
       dispatch(getSongs());
       dispatch(orderActions.setOrders());
     } catch (error) {

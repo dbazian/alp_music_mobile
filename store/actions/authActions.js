@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Iaphub from "react-native-iaphub";
+import { addToken } from "../actions/tokenActions";
+
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
 
@@ -38,7 +40,6 @@ export const signup = data => {
       }
       throw new Error(message);
     }
-
     const resData = await response.json();
     dispatch(
       authenticate(
@@ -47,6 +48,7 @@ export const signup = data => {
         parseInt(resData.expiresIn) * 1000
       )
     );
+    dispatch(addToken(0));
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );
@@ -81,7 +83,6 @@ export const login = data => {
       }
       throw new Error(message);
     }
-
     const resData = await response.json();
     dispatch(
       authenticate(
@@ -90,11 +91,11 @@ export const login = data => {
         parseInt(resData.expiresIn) * 1000
       )
     );
-
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
+    await Iaphub.setUserId(resData.localId);
   };
 };
 

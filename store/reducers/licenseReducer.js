@@ -1,4 +1,4 @@
-import { LICENSE_INFO } from "../actions/licenseAction";
+import { LICENSE_INFO } from "../actions/licenseActions";
 
 const initialState = {
   data: [],

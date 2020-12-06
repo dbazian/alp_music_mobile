@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Alert } from "react-native";
 import { withNavigation } from "react-navigation";
 import { useDispatch, useSelector } from "react-redux";
 import * as cartActions from "../../../store/actions/cartActions";
-import * as licenseActions from "../../../store/actions/licenseAction";
+import * as licenseActions from "../../../store/actions/licenseActions";
 import * as favoriteActions from "../../../store/actions/favoriteActions";
 import SongText from "../Texts/SongText";
 import SongCard from "../Wrappers/SongCard";
@@ -44,8 +44,6 @@ const FavoriteItem = props => {
       setIconSwitch(faDownload);
     }
   });
-
-  console.log(props.items.fid);
 
   const favoritesPress = async () => {
     await dispatch(favoriteActions.removeFavorite(props.items.fid));

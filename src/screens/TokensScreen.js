@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { addToken } from "../../store/actions/tokenActions";
 import Gradient from "../components/Wrappers/Gradient";
 import MainButton from "../components/Interactive/MainButton";
 import Iaphub from "react-native-iaphub";
 
 const TokensScreen = () => {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -16,25 +19,41 @@ const TokensScreen = () => {
 
   const tokenOne = async () => {
     try {
-      await Iaphub.buy("tokenOne");
+      console.log("token one");
+      //  await Iaphub.buy("tokenOne");
     } catch (error) {
       console.log(error);
+      setError(error);
+    }
+    if (error === null) {
+      dispatch(addToken(1));
     }
   };
 
   const tokenFive = async () => {
     try {
-      await Iaphub.buy("tokenFive");
+      console.log("token one");
+
+      //  await Iaphub.buy("tokenFive");
     } catch (error) {
       console.log(error);
+      setError(error);
+    }
+    if (error === null) {
+      dispatch(addToken(5));
     }
   };
 
   const tokenTen = async () => {
     try {
-      await Iaphub.buy("tokenTen");
+      console.log("token one");
+      //   await Iaphub.buy("tokenTen");
     } catch (error) {
       console.log(error);
+      setError(error);
+    }
+    if (error === null) {
+      dispatch(addToken(10));
     }
   };
 

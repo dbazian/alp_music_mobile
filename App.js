@@ -15,6 +15,7 @@ import playerReducer from "./store/reducers/playerReducer";
 import authReducer from "./store/reducers/authReducer";
 import licenseReducer from "./store/reducers/licenseReducer";
 import favoriteReducer from "./store/reducers/favoriteReducer";
+import tokenReducer from "./store/reducers/tokenReducer";
 
 enableScreens();
 
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   license: licenseReducer,
   favorite: favoriteReducer,
+  token: tokenReducer,
 });
 const store = createStore(
   rootReducer,
@@ -40,7 +42,6 @@ function App() {
       await Iaphub.init({
         appId: "5fc904782e29380e8a1bb226",
         apiKey: "d7u2uIGQpoQ23U8lBTC1Oui5vcw8Ku",
-        environment: "Development",
       });
       await Font.loadAsync({
         "Raleway-Medium": require("./assets/fonts/Raleway-Medium.ttf"),

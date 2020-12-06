@@ -14,7 +14,7 @@ import LogoText from "../components/Logos/LogoText";
 import Logo from "../components/Logos/Logo";
 import DefaultStyles from "../../constants/default-styles";
 
-const AuthScreen = (props) => {
+const AuthScreen = props => {
   const { control, handleSubmit, errors } = useForm();
   const [isSignup, setIsSignup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ const AuthScreen = (props) => {
   const [error, setError] = useState();
   const dispatch = useDispatch();
   const signupToggle = () => {
-    setIsSignup((prevState) => !prevState);
+    setIsSignup(prevState => !prevState);
   };
   const passwordModal = () => {
     setModalToggle(!modalToggle);
@@ -34,18 +34,21 @@ const AuthScreen = (props) => {
     }
   }, [error]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     let action;
-    isSignup ? (action = authActions.signup(data)) : (action = authActions.login(data));
+    isSignup
+      ? (action = authActions.signup(data))
+      : (action = authActions.login(data));
     setIsLoading(true);
     setError(null);
     try {
-      dispatch(action);
+      await dispatch(action);
       props.navigation.navigate("Tab");
-    } catch (err) {
-      setError(err.message);
-      setIsLoading(false);
+    } catch (e) {
+      console.log("caught error");
+      setError(e.message);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -62,7 +65,7 @@ const AuthScreen = (props) => {
               keyboardType="email-address"
               required
               autoCapitalize="none"
-              onChangeText={(value) => {
+              onChangeText={value => {
                 onChange(value);
               }}
               value={value}
@@ -84,7 +87,7 @@ const AuthScreen = (props) => {
               keyboardType="default"
               autoCapitalize="none"
               required
-              onChangeText={(value) => onChange(value)}
+              onChangeText={value => onChange(value)}
               value={value}
               inititalValue=""
             />
@@ -98,9 +101,15 @@ const AuthScreen = (props) => {
       {isLoading ? (
         <BarIndicator color="white" count={5} />
       ) : (
-        <MainButton name={isSignup ? "Sign up" : "Login"} onPress={handleSubmit(onSubmit)} />
+        <MainButton
+          name={isSignup ? "Sign up" : "Login"}
+          onPress={handleSubmit(onSubmit)}
+        />
       )}
-      <Link title={isSignup ? "Switch to log in" : "Switch to sign up."} onPress={signupToggle} />
+      <Link
+        title={isSignup ? "Switch to log in" : "Switch to sign up."}
+        onPress={signupToggle}
+      />
       <Link title={"Forgot Password"} onPress={passwordModal} />
       <Logo />
     </Gradient>
