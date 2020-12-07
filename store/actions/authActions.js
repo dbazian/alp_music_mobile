@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Iaphub from "react-native-iaphub";
 import { addToken } from "../actions/tokenActions";
 
 export const AUTHENTICATE = "AUTHENTICATE";
@@ -95,13 +94,11 @@ export const login = data => {
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
-    await Iaphub.setUserId(resData.localId);
   };
 };
 
 export const logout = () => {
   clearLogoutTimer();
-  Iaphub.setUserId(null);
   AsyncStorage.removeItem("userData");
   return { type: LOGOUT };
 };

@@ -54,7 +54,7 @@ const UserScreen = props => {
 
   const loadProducts = useCallback(async () => {
     try {
-      //dispatch(setToken());
+      dispatch(setToken());
       dispatch(getSongs());
       dispatch(orderActions.setOrders());
     } catch (error) {

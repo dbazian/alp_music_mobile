@@ -12,7 +12,9 @@ export default (state = initialState, action) => {
       };
 
     case ADD_TOKEN: {
-      alert("Your tokens have been added!");
+      if (state.tokens > 0) {
+        alert("Your tokens have been added!");
+      }
     }
   }
   return state;

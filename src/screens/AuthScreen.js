@@ -39,16 +39,15 @@ const AuthScreen = props => {
     isSignup
       ? (action = authActions.signup(data))
       : (action = authActions.login(data));
-    setIsLoading(true);
     setError(null);
     try {
+      setIsLoading(true);
       await dispatch(action);
+      setIsLoading(false);
       props.navigation.navigate("Tab");
     } catch (e) {
-      console.log("caught error");
       setError(e.message);
     }
-    setIsLoading(false);
   };
 
   return (

@@ -8,7 +8,7 @@ export const addToken = tokenCount => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     const currentTokens = getState().token.tokens;
-
+    console.log(currentTokens);
     await axios
       .patch(
         `https://alp-music.firebaseio.com/tokens/${userId}.json?auth=${token}`,
@@ -42,8 +42,6 @@ export const setToken = () => {
       .get(`https://alp-music.firebaseio.com/tokens/${userId}.json`)
       .then(response => {
         const resData = response.data;
-        console.log("res data");
-        console.log(resData);
         if (resData.tokens != null) {
           dispatch({ type: SET_TOKEN, tokens: resData.tokens });
         }
