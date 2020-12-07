@@ -10,7 +10,7 @@ import AuthScreen from "../src/screens/AuthScreen";
 import StartupScreen from "../src/screens/StartupScreen";
 import PaymentScreen from "../src/screens/PaymentScreen";
 import OrderScreen from "../src/screens/OrderScreen";
-import TokensScreen from "../src/screens/TokensScreen";
+import CreditScreen from "../src/screens/CreditScreen";
 import LicenseScreen from "../src/screens/LicenseScreen";
 import FavoriteScreen from "../src/screens/FavoriteScreen";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -67,7 +67,7 @@ const UserNavigator = createStackNavigator(
   {
     User: UserScreen,
     Orders: OrderScreen,
-    Tokens: TokensScreen,
+    Credits: CreditScreen,
   },
   {
     defaultNavigationOptions: {

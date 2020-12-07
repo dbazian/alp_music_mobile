@@ -5,7 +5,6 @@ import { enableScreens } from "react-native-screens";
 import reduxThunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import Iaphub from "react-native-iaphub";
 import { composeWithDevTools } from "redux-devtools-extension";
 import * as SplashScreen from "expo-splash-screen";
 import filterReducer from "./store/reducers/filterReducer";
@@ -15,7 +14,7 @@ import playerReducer from "./store/reducers/playerReducer";
 import authReducer from "./store/reducers/authReducer";
 import licenseReducer from "./store/reducers/licenseReducer";
 import favoriteReducer from "./store/reducers/favoriteReducer";
-import tokenReducer from "./store/reducers/tokenReducer";
+import creditReducer from "./store/reducers/creditReducer";
 
 enableScreens();
 
@@ -27,7 +26,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   license: licenseReducer,
   favorite: favoriteReducer,
-  token: tokenReducer,
+  credit: creditReducer,
 });
 const store = createStore(
   rootReducer,
@@ -39,10 +38,6 @@ function App() {
 
   useEffect(() => {
     const prepareResources = async () => {
-      await Iaphub.init({
-        appId: "5fc904782e29380e8a1bb226",
-        apiKey: "d7u2uIGQpoQ23U8lBTC1Oui5vcw8Ku",
-      });
       await Font.loadAsync({
         "Raleway-Medium": require("./assets/fonts/Raleway-Medium.ttf"),
         "Raleway-Bold": require("./assets/fonts/Raleway-Bold.ttf"),

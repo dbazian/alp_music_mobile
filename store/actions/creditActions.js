@@ -1,25 +1,25 @@
 import axios from "axios";
 
-export const ADD_TOKEN = "ADD_TOKEN";
-export const SET_TOKEN = "SET_TOKEN";
-export const USE_TOKEN = "USE_TOKEN";
+export const ADD_CREDIT = "ADD_CREDIT";
+export const SET_CREDIT = "SET_CREDIT";
+export const USE_CREDIT = "USE_CREDIT";
 
-export const addToken = tokenCount => {
+export const addCredit = creditCount => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
-    const currentTokens = getState().token.tokens;
+    const currentCredits = getState().credit.credits;
     await axios
       .patch(
-        `https://alp-music.firebaseio.com/tokens/${userId}.json?auth=${token}`,
+        `https://alp-music.firebaseio.com/credits/${userId}.json?auth=${token}`,
         {
-          tokens: currentTokens + tokenCount,
+          credits: currentCredits + creditCount,
         }
       )
       .then(response => {
         dispatch({
-          type: ADD_TOKEN,
-          tokens: currentTokens + tokenCount,
+          type: ADD_CREDIT,
+          credits: currentCredits + creditCount,
         });
       })
       .catch(error => {
@@ -32,21 +32,21 @@ export const addToken = tokenCount => {
         }
         throw error;
       });
-    alert("Thanks for your purchase");
+    alert("Thank you for your purchase");
   };
 };
 
-export const setToken = () => {
+export const setCredit = () => {
   return async (dispatch, getState) => {
     const userId = getState().auth.userId;
     await axios
-      .get(`https://alp-music.firebaseio.com/tokens/${userId}.json`)
+      .get(`https://alp-music.firebaseio.com/credits/${userId}.json`)
       .then(response => {
         const resData = response.data;
         if (resData === null) {
-          dispatch({ type: SET_TOKEN, tokens: 0 });
+          dispatch({ type: SET_CREDIT, credits: 0 });
         } else {
-          dispatch({ type: SET_TOKEN, tokens: resData.tokens });
+          dispatch({ type: SET_CREDIT, credits: resData.credits });
         }
       })
       .catch(error => {
@@ -62,22 +62,22 @@ export const setToken = () => {
   };
 };
 
-export const useToken = tokenCount => {
+export const useCredit = creditCount => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
-    const currentTokens = getState().token.tokens;
+    const currentCredits = getState().credit.credits;
     await axios
       .patch(
-        `https://alp-music.firebaseio.com/tokens/${userId}.json?auth=${token}`,
+        `https://alp-music.firebaseio.com/credits/${userId}.json?auth=${token}`,
         {
-          tokens: currentTokens - tokenCount,
+          credits: currentCredits - creditCount,
         }
       )
       .then(response => {
         dispatch({
-          type: USE_TOKEN,
-          tokens: currentTokens - tokenCount,
+          type: USE_CREDIT,
+          credits: currentCredits - creditCount,
         });
       })
       .catch(error => {
@@ -90,6 +90,6 @@ export const useToken = tokenCount => {
         }
         throw error;
       });
-    alert(`You have used ${tokenCount} tokens`);
+    alert(`You have used ${creditCount} credits`);
   };
 };

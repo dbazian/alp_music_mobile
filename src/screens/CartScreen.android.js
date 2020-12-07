@@ -10,7 +10,6 @@ import Gradient from "../components/Wrappers/Gradient";
 const CartScreen = props => {
   const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
   const seenTotalAmount = useSelector(state => state.cart.totalAmount);
-  const audioTokens = useSelector(state => state.token.tokens);
   const cartItems = useSelector(state => {
     const transformedCartItems = [];
     for (const key in state.cart.items) {

@@ -47,6 +47,7 @@ const AuthScreen = props => {
       props.navigation.navigate("Tab");
     } catch (e) {
       setError(e.message);
+      setIsLoading(false);
     }
   };
 

@@ -12,7 +12,7 @@
         }
       ],
       "productID" : "com.temporary.id",
-      "referenceName" : "tokenOne",
+      "referenceName" : "creditOne",
       "type" : "Consumable"
     },
     {
@@ -27,7 +27,7 @@
         }
       ],
       "productID" : "com.temporary.id",
-      "referenceName" : "tokenFive",
+      "referenceName" : "creditFive",
       "type" : "Consumable"
     },
     {
@@ -42,7 +42,7 @@
         }
       ],
       "productID" : "com.temporary.id",
-      "referenceName" : "tokenTen",
+      "referenceName" : "creditTen",
       "type" : "Consumable"
     }
   ],

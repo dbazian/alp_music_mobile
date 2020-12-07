@@ -3,7 +3,7 @@ import { FlatList, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
 import { addOrder } from "../../store/actions/orderActions";
-import { useToken, setToken } from "../../store/actions/tokenActions";
+import { useCredit, setCredit } from "../../store/actions/creditActions";
 import SongItem from "../components/Items/SongItem";
 import BodyText from "../components/Texts/BodyText";
 import HeaderText from "../components/Texts/HeaderText";
@@ -12,7 +12,7 @@ import Gradient from "../components/Wrappers/Gradient";
 
 const CartScreen = props => {
   const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
-  const myTokens = useSelector(state => state.token.tokens);
+  const myCredits = useSelector(state => state.credit.credits);
   const cartItems = useSelector(state => {
     const transformedCartItems = [];
     for (const key in state.cart.items) {
@@ -42,18 +42,18 @@ const CartScreen = props => {
     if (isAudioPlaying) {
       dispatch(stopPlay(true));
     }
-    if (myTokens >= cartItems.length) {
-      dispatch(useToken(cartItems.length));
+    if (myCredits >= cartItems.length) {
+      dispatch(useCredit(cartItems.length));
       dispatch(addOrder(cartItems));
-      dispatch(setToken());
+      dispatch(setCredit());
     } else {
       Alert.alert(
-        "You need more tokens to purhcase.",
-        "Proceed to purchase tokens?",
+        "Not enough credits to purchase.",
+        "Proceed to purchase credits?",
         [
           {
             text: "Ok",
-            onPress: () => props.navigation.navigate({ routeName: "Tokens" }),
+            onPress: () => props.navigation.navigate({ routeName: "Credits" }),
           },
           {
             text: "Cancel",
@@ -68,8 +68,8 @@ const CartScreen = props => {
     return (
       <Gradient>
         <HeaderText> Your cart is empty. </HeaderText>
-        <BodyText>Tokens: {myTokens}</BodyText>
-        <BodyText> Tokens Needed: {cartItems.length}</BodyText>
+        <BodyText>Credits: {myCredits}</BodyText>
+        <BodyText> Credits Needed: {cartItems.length}</BodyText>
       </Gradient>
     );
   }
@@ -85,8 +85,8 @@ const CartScreen = props => {
         keyExtractor={item => item.id.toString()}
         renderItem={itemData => <SongItem items={itemData.item} deletable />}
       />
-      <BodyText>Tokens: {myTokens}</BodyText>
-      <BodyText> Tokens Needed: {cartItems.length}</BodyText>
+      <BodyText>Credits: {myCredits}</BodyText>
+      <BodyText> Credits Needed: {cartItems.length}</BodyText>
       <MainButton name={"Purchase"} onPress={handlePurchasePress} />
     </Gradient>
   );
