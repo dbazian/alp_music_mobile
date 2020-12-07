@@ -43,7 +43,9 @@ export const setToken = () => {
       .get(`https://alp-music.firebaseio.com/tokens/${userId}.json`)
       .then(response => {
         const resData = response.data;
-        if (resData.tokens != null) {
+        if (resData === null) {
+          dispatch({ type: SET_TOKEN, tokens: 0 });
+        } else {
           dispatch({ type: SET_TOKEN, tokens: resData.tokens });
         }
       })

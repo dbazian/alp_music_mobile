@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FlatList } from "react-native";
+import { FlatList, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
 import { addOrder } from "../../store/actions/orderActions";
@@ -46,6 +46,21 @@ const CartScreen = props => {
       dispatch(useToken(cartItems.length));
       dispatch(addOrder(cartItems));
       dispatch(setToken());
+    } else {
+      Alert.alert(
+        "You need more tokens to purhcase.",
+        "Proceed to purchase tokens?",
+        [
+          {
+            text: "Ok",
+            onPress: () => props.navigation.navigate({ routeName: "Tokens" }),
+          },
+          {
+            text: "Cancel",
+            onPress: () => console.log("cancelled going to orders"),
+          },
+        ]
+      );
     }
   };
 

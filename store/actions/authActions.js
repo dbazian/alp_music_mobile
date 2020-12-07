@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addToken } from "../actions/tokenActions";
 
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
@@ -47,7 +46,6 @@ export const signup = data => {
         parseInt(resData.expiresIn) * 1000
       )
     );
-    dispatch(addToken(0));
     const expirationDate = new Date(
       new Date().getTime() + parseInt(resData.expiresIn) * 1000
     );

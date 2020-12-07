@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToken, setToken } from "../../store/actions/tokenActions";
 import Gradient from "../components/Wrappers/Gradient";
 import MainButton from "../components/Interactive/MainButton";
-import Iaphub from "react-native-iaphub";
-const TokensScreen = () => {
+import HeaderText from "../components/Texts/HeaderText";
+
+const TokensScreen = ({ navigation }) => {
+  const currentTokens = useSelector(state => state.token.tokens);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
@@ -49,10 +51,14 @@ const TokensScreen = () => {
 
   return (
     <Gradient>
+      <HeaderText>Current Tokens: {currentTokens}</HeaderText>
       <MainButton name={"Purchase 1 Token"} onPress={tokenOne} />
       <MainButton name={"Purchase 5 Tokens"} onPress={tokenFive} />
       <MainButton name={"Purchase 10 Tokens"} onPress={tokenTen} />
-      <MainButton name={"Back"} />
+      <MainButton
+        name={"Back"}
+        onPress={() => navigation.navigate({ routeName: "User" })}
+      />
     </Gradient>
   );
 };
