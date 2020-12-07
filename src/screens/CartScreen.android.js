@@ -27,7 +27,6 @@ const CartScreen = props => {
     return transformedCartItems;
   });
   const dispatch = useDispatch();
-  console.log(audioTokens);
 
   useEffect(() => {
     props.navigation.addListener("didBlur", () => {

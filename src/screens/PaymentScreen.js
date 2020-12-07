@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Alert, Text, Linking, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  Text,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import stripe from "tipsi-stripe";
@@ -15,11 +22,11 @@ import { TestKey } from "../../InitializeStripe";
 import DefaultStyles from "../../constants/default-styles";
 import HeaderText from "../components/Texts/HeaderText";
 
-const PaymentScreen = (props) => {
+const PaymentScreen = props => {
   stripe.setOptions({
     publishableKey: TestKey,
   });
-  const cartItems = useSelector((state) => {
+  const cartItems = useSelector(state => {
     const transformedCartItems = [];
     for (const key in state.cart.items) {
       transformedCartItems.push({
@@ -34,7 +41,7 @@ const PaymentScreen = (props) => {
     }
     return transformedCartItems;
   });
-  const cartTotalAmount = useSelector((state) => state.cart.totalAmount * 100);
+  const cartTotalAmount = useSelector(state => state.cart.totalAmount * 100);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoading, setisLoading] = useState(false);
@@ -78,10 +85,12 @@ const PaymentScreen = (props) => {
           currency: "usd",
           token: token,
         },
-      }).then((res) => {
+      }).then(res => {
         if (res.data.code === undefined) {
           dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
-          Alert.alert("Thank You! Navigate to User/Orders to download your file");
+          Alert.alert(
+            "Thank You! Navigate to User/Orders to download your file"
+          );
           props.navigation.navigate({ routeName: "Cart" });
           setisLoading(false);
         } else {
@@ -111,14 +120,21 @@ const PaymentScreen = (props) => {
         {showCard && (
           <View>
             <HeaderText>Step 1</HeaderText>
-            <MainButton name={"Add Payment"} isLoading={isLoading} onPress={handleCardPayPress} />
+            <MainButton
+              name={"Add Payment"}
+              isLoading={isLoading}
+              onPress={handleCardPayPress}
+            />
           </View>
         )}
         {showTerms && (
           <View>
             <HeaderText>Step 2{"\n"}By checking you agree to our </HeaderText>
             <View style={styles.termsCheck}>
-              <TouchableOpacity onPress={() => Linking.openURL(`https://alpmusic.com/Terms.pdf`)}>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(`https://alpmusic.com/Terms.pdf`)
+                }>
                 <Text style={styles.link}>Terms and Conditions</Text>
               </TouchableOpacity>
               <CheckBox
