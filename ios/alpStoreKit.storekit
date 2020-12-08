@@ -11,7 +11,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.temporary.id",
+      "productID" : "com.credit.id",
       "referenceName" : "creditOne",
       "type" : "Consumable"
     },
@@ -26,7 +26,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.temporary.id",
+      "productID" : "com.creditFive.id",
       "referenceName" : "creditFive",
       "type" : "Consumable"
     },
@@ -41,8 +41,23 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.temporary.id",
+      "productID" : "com.creditTen.id",
       "referenceName" : "creditTen",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "A9DB25CD",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.creditOne.id",
+      "referenceName" : "creditOne",
       "type" : "Consumable"
     }
   ],

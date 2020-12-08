@@ -32,7 +32,6 @@ export const addCredit = creditCount => {
         }
         throw error;
       });
-    alert("Thank you for your purchase");
   };
 };
 

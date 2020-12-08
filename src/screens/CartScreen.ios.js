@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
