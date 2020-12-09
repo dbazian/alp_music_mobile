@@ -52,35 +52,6 @@ const OrderItem = props => {
                   <View style={DefaultStyles.cardIconContainer}>
                     <PlayPause audioFile={song.audio} />
                     <Download audioFile={song.audio} />
-                    <TouchableOpacity
-                      onPress={() => {
-                        Alert.alert(
-                          "For commercial licensing you will be redirected to our website.",
-                          "Do you wish to continue?",
-                          [
-                            {
-                              text: "Ok",
-                              onPress: () =>
-                                Linking.openURL(
-                                  `https://alpmusic.sourceaudio.com/#!details?id=${props.id}`
-                                ),
-                            },
-                            {
-                              text: "Cancel",
-                              onPress: () =>
-                                console.log("cancelled going to url"),
-                              style: "cancel",
-                            },
-                          ],
-                          { cancelable: false }
-                        );
-                      }}>
-                      <FontAwesomeIcon
-                        icon={faFileInvoice}
-                        size={hp("5%")}
-                        color={Colors.primary}
-                      />
-                    </TouchableOpacity>
                   </View>
                 </View>
               </SongCard>

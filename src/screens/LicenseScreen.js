@@ -8,13 +8,18 @@ import RadioForm from "react-native-simple-radio-button";
 import SmallButton from "../components/Interactive/SmallButton";
 import Gradient from "../components/Wrappers/Gradient";
 import HeaderText from "../components/Texts/HeaderText";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import DefaultStyles from "../../constants/default-styles";
 
-const LicenseScreen = (props) => {
-  const isAudioPlaying = useSelector((state) => state.player.isAudioPlaying);
-  const songId = useSelector((state) => state.license.data);
-  const selectedSong = useSelector((state) => state.filter.songData.find((song) => song.id === songId));
+const LicenseScreen = props => {
+  const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
+  const songId = useSelector(state => state.license.data);
+  const selectedSong = useSelector(state =>
+    state.filter.songData.find(song => song.id === songId)
+  );
   const dispatch = useDispatch();
   const { goBack } = props.navigation;
 
@@ -25,7 +30,6 @@ const LicenseScreen = (props) => {
       }
     });
   }, []);
-
   const purchaseSelector = (value, label) => {
     if (label === 0) {
       Alert.alert("Add To Shopping Cart?", "Proceed to cart to checkout", [
@@ -43,7 +47,9 @@ const LicenseScreen = (props) => {
         },
       ]);
     } else {
-      Linking.openURL(`https://alpmusic.sourceaudio.com/#!details?id=${songId}`);
+      Linking.openURL(
+        `mailto:info@alpmusic.com?subject=${selectedSong.name}?body=What is the intended use for this song?`
+      );
       props.navigation.navigate({ routeName: "Songs" });
     }
   };

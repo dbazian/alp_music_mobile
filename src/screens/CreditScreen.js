@@ -17,60 +17,36 @@ const CreditScreen = ({ navigation }) => {
 
   useEffect(() => {
     const connect = async () => {
+      dispatch(setCredit());
       try {
-        setIsLoading(true);
-        await RNIap.initConnection();
-        const products = await RNIap.getProducts(itemSkus);
-        setProductList(products);
-        dispatch(setCredit());
-        setIsLoading(false);
+        const result = await RNIap.initConnection();
+        console.log("result", result);
       } catch (e) {
         console.log(e);
       }
     };
     connect();
-    return (cleanup = async () => {
-      await RNIap.endConnection();
-    });
   }, []);
 
-  const creditOne = async () => {
+  const requestPurchase = async (sku, credits) => {
     setError(null);
     try {
-      await RNIap.requestPurchase(itemSkus[0]);
-    } catch (error) {
-      console.log(error);
-      setError(error);
+      setIsLoading(true);
+      const products = await RNIap.getProducts(itemSkus);
+      setProductList(products);
+      await RNIap.requestPurchase(sku);
+      const purchases = await RNIap.getAvailablePurchases();
+      console.log(purchases);
+      await RNIap.finishTransactionIOS(purchases.transactionID, true);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setError(err);
+      setIsLoading(false);
     }
     if (error === null) {
       await dispatch(setCredit());
-      await dispatch(addCredit(1));
-    }
-  };
-
-  const creditFive = async () => {
-    setError(null);
-    try {
-      await RNIap.requestPurchase(itemSkus[1]);
-    } catch (error) {
-      setError(error);
-    }
-    if (error === null) {
-      await dispatch(setCredit());
-      await dispatch(addCredit(5));
-    }
-  };
-
-  const creditTen = async () => {
-    setError(null);
-    try {
-      await RNIap.requestPurchase(itemSkus[2]);
-    } catch (error) {
-      setError(error);
-    }
-    if (error === null) {
-      await dispatch(setCredit());
-      await dispatch(addCredit(10));
+      await dispatch(addCredit(credits));
     }
   };
 
@@ -85,9 +61,18 @@ const CreditScreen = ({ navigation }) => {
   return (
     <Gradient>
       <HeaderText>Current Credits: {currentCredits}</HeaderText>
-      <MainButton name={"1 Credit - $19.99"} onPress={creditOne} />
-      <MainButton name={"5 Credits - $79.99"} onPress={creditFive} />
-      <MainButton name={"10 Credits - $139.99"} onPress={creditTen} />
+      <MainButton
+        name={"1 Credit - $19.99"}
+        onPress={() => requestPurchase(itemSkus[0], 1)}
+      />
+      <MainButton
+        name={"5 Credits - $79.99"}
+        onPress={() => requestPurchase(itemSkus[1], 5)}
+      />
+      <MainButton
+        name={"10 Credits - $139.99"}
+        onPress={() => requestPurchase(itemSkus[2], 10)}
+      />
       <MainButton
         name={"Back"}
         onPress={() => navigation.navigate({ routeName: "User" })}

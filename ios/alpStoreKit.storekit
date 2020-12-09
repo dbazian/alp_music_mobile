@@ -6,8 +6,8 @@
       "internalID" : "C0436DE3",
       "localizations" : [
         {
-          "description" : "",
-          "displayName" : "",
+          "description" : "Purchase 1 Credit",
+          "displayName" : "1 Credit",
           "locale" : "en_US"
         }
       ],
@@ -21,8 +21,8 @@
       "internalID" : "146955CB",
       "localizations" : [
         {
-          "description" : "",
-          "displayName" : "",
+          "description" : "Purchase 5 Credits",
+          "displayName" : "5 Credits",
           "locale" : "en_US"
         }
       ],
@@ -36,28 +36,13 @@
       "internalID" : "40D4C429",
       "localizations" : [
         {
-          "description" : "",
-          "displayName" : "",
+          "description" : "Purchase 10 Credits",
+          "displayName" : "10 Credits",
           "locale" : "en_US"
         }
       ],
       "productID" : "com.creditTen.id",
       "referenceName" : "creditTen",
-      "type" : "Consumable"
-    },
-    {
-      "displayPrice" : "19.99",
-      "familyShareable" : false,
-      "internalID" : "A9DB25CD",
-      "localizations" : [
-        {
-          "description" : "",
-          "displayName" : "",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "com.creditOne.id",
-      "referenceName" : "creditOne",
       "type" : "Consumable"
     }
   ],

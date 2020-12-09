@@ -12,23 +12,26 @@ const InstructionsModal = props => {
       <Gradient>
         <HeaderText>Instructions</HeaderText>
         <BodyText>
-          1.)Purchase either 1, 5, or 10 credits to redeem for songs.
+          1.) Navigate to the user tab and press purchase credits.
         </BodyText>
         <BodyText>
-          2.) Add desired song to your cart, your current credits and the
+          2.)Purchase either 1, 5, or 10 credits to redeem for songs.
+        </BodyText>
+        <BodyText>
+          3.) Add desired song to your cart, your current credits and the
           credits needed will be shown at the bottom of your cart.
         </BodyText>
         <BodyText>
-          3.) Press the purchase button and your song or songs will be added to
+          4.) Press the purchase button and your song or songs will be added to
           your order screen.
         </BodyText>
-        <BodyText>4.) Go to User / Orders </BodyText>
+        <BodyText>5.) Go to User / Orders </BodyText>
         <BodyText>
-          5.) Press the download icon and choose the location you would like to
+          6.) Press the download icon and choose the location you would like to
           save your audio file.
         </BodyText>
         <BodyText>
-          6.) Access the audio track from the location where it was saved.
+          7.) Access the audio track from the location where it was saved.
         </BodyText>
         <View style={DefaultStyles.buttonContainer}>
           <MainButton name={"Back"} onPress={props.onPress} />
