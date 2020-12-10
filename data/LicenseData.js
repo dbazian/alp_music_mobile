@@ -8,7 +8,7 @@ const LicenseData = [
   },
   {
     value: 0,
-    label: <BodyText>Commercial - {"\n"}(Redirected to website.)</BodyText>,
+    label: <BodyText>Commercial - {"\n"}(Additional info is needed.)</BodyText>,
   },
 ];
 

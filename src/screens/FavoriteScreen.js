@@ -46,7 +46,7 @@ const FavoriteScreen = props => {
           onPress={toCart}
           removeClippedSubviews={false}
           windowSize={100}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item.id.toString()}
           maxToRenderPerBatch={15}
           initialNumToRender={8}
           data={favoriteItems}

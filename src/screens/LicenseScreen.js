@@ -48,7 +48,7 @@ const LicenseScreen = props => {
       ]);
     } else {
       Linking.openURL(
-        `mailto:info@alpmusic.com?subject=${selectedSong.name}?body=What is the intended use for this song?`
+        `mailto:info@alpmusic.com?subject=${selectedSong.name}&body=What is the intended use for this song?`
       );
       props.navigation.navigate({ routeName: "Songs" });
     }
