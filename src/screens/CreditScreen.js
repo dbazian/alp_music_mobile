@@ -38,15 +38,14 @@ const CreditScreen = ({ navigation }) => {
       const purchases = await RNIap.getAvailablePurchases();
       console.log(purchases);
       await RNIap.finishTransactionIOS(purchases.transactionID, true);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-      setError(err);
-      setIsLoading(false);
-    }
-    if (error === null) {
       await dispatch(setCredit());
       await dispatch(addCredit(credits));
+      setIsLoading(false);
+    } catch (err) {
+      console.log("request purchase error", err);
+      setError(err);
+      alert(error);
+      setIsLoading(false);
     }
   };
 

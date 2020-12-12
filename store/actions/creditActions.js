@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Alert } from "react-native";
 
 export const ADD_CREDIT = "ADD_CREDIT";
 export const SET_CREDIT = "SET_CREDIT";
@@ -89,6 +90,5 @@ export const useCredit = creditCount => {
         }
         throw error;
       });
-    alert(`You have used ${creditCount} credits`);
   };
 };

@@ -1,12 +1,15 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import HeaderText from "../Texts/HeaderText";
-const MainButton = (props) => {
+const MainButton = props => {
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={[styles.button, props.style]}
       onPress={props.onPress}
       disabled={props.disabled}
       activeOpacity={0.5}

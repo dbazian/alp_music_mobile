@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Linking,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import moment from "moment";
 import OrderCard from "../Wrappers/OrderCard";
 import SongCard from "../Wrappers/SongCard";
@@ -17,8 +10,6 @@ import Download from "../AudioPlayer/Download";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Colors from "../../../constants/Colors";
 import DefaultStyles from "../../../constants/default-styles";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faFileInvoice } from "@fortawesome/pro-light-svg-icons";
 
 const OrderItem = props => {
   const songDate = moment(props.date).format("MMMM Do YYYY");

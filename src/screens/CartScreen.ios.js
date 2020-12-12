@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Alert } from "react-native";
+import {
+  FlatList,
+  Alert,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { stopPlay } from "../../store/actions/playerActions";
 import { addOrder } from "../../store/actions/orderActions";
 import { useCredit, setCredit } from "../../store/actions/creditActions";
-import SongItem from "../components/Items/SongItem";
+import CheckBox from "@react-native-community/checkbox";
+import SongItem from "../components/Items/SongItem.android";
 import BodyText from "../components/Texts/BodyText";
 import HeaderText from "../components/Texts/HeaderText";
 import MainButton from "../components/Interactive/MainButton";
 import Gradient from "../components/Wrappers/Gradient";
+import Colors from "../../constants/Colors";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 const CartScreen = props => {
   const isAudioPlaying = useSelector(state => state.player.isAudioPlaying);
@@ -28,6 +38,8 @@ const CartScreen = props => {
     }
     return transformedCartItems;
   });
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [styleSwitch, setStyleSwitch] = useState(styles.disabled);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,14 +50,61 @@ const CartScreen = props => {
     });
   });
 
+  useEffect(() => {
+    setButtonDisabled(true);
+    setStyleSwitch(styles.disabled);
+  }, []);
+
+  useEffect(() => {
+    if (buttonDisabled === true) {
+      setStyleSwitch(styles.disabled);
+    } else {
+      setStyleSwitch("");
+    }
+  }, [buttonDisabled]);
+
   const handlePurchasePress = () => {
     if (isAudioPlaying) {
       dispatch(stopPlay(true));
     }
     if (myCredits >= cartItems.length) {
-      dispatch(useCredit(cartItems.length));
-      dispatch(addOrder(cartItems));
-      dispatch(setCredit());
+      Alert.alert(
+        `You are about to use ${cartItems.length} credits`,
+        "Would you like to proceed",
+        [
+          {
+            text: "Ok",
+            onPress: async () => {
+              try {
+                await dispatch(useCredit(cartItems.length));
+                await dispatch(addOrder(cartItems));
+                await dispatch(setCredit());
+              } catch (e) {
+                console.log(e);
+              }
+              Alert.alert(
+                `You have used ${cartItems.length} credits`,
+                "Proceed to orders screen to download?",
+                [
+                  {
+                    text: "Ok",
+                    onPress: () =>
+                      props.navigation.navigate({ routeName: "Orders" }),
+                  },
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log("stay on cart page"),
+                  },
+                ]
+              );
+            },
+          },
+          {
+            text: "Cancel",
+            onPress: () => console.log("cancelled purchase"),
+          },
+        ]
+      );
     } else {
       Alert.alert(
         "Not enough credits to purchase.",
@@ -62,6 +121,19 @@ const CartScreen = props => {
         ]
       );
     }
+  };
+
+  const handleTerms = () => {
+    if (buttonDisabled === true) {
+      alert(
+        "You have agreed to the terms and conditions, you can proceed to purchase."
+      );
+    } else {
+      alert(
+        "You must agree to the terms and conditions to proceed to purchase."
+      );
+    }
+    setButtonDisabled(!buttonDisabled);
   };
 
   if (cartItems.length === 0) {
@@ -87,10 +159,51 @@ const CartScreen = props => {
       />
       <BodyText>Credits: {myCredits}</BodyText>
       <BodyText> Credits Needed: {cartItems.length}</BodyText>
-      <MainButton name={"Purchase"} onPress={handlePurchasePress} />
+      <View>
+        <HeaderText>By checking you agree to our </HeaderText>
+        <View style={styles.termsCheck}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`https://alpmusic.com/Terms.pdf`)}>
+            <Text style={styles.link}>Terms and Conditions</Text>
+          </TouchableOpacity>
+          <CheckBox
+            tintColors={{ true: "white", false: "white" }}
+            style={{ tintColor: "white" }}
+            onCheckColor={"white"}
+            onTintColor={Colors.Primary}
+            onChange={handleTerms}
+          />
+        </View>
+      </View>
+      <MainButton
+        name={"Purchase"}
+        onPress={handlePurchasePress}
+        disabled={buttonDisabled}
+        style={styleSwitch}
+      />
     </Gradient>
   );
 };
+
+const styles = StyleSheet.create({
+  termsCheck: {
+    flexDirection: "row",
+    paddingVertical: 10,
+  },
+  link: {
+    color: "white",
+    fontSize: hp("3%"),
+    fontStyle: "italic",
+    textDecorationLine: "underline",
+    marginHorizontal: 20,
+  },
+  buttons: {
+    width: "30%",
+  },
+  disabled: {
+    backgroundColor: "gray",
+  },
+});
 
 CartScreen.navigationOptions = {
   headerTitle: "Cart",
