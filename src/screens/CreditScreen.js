@@ -9,7 +9,7 @@ import RNIap from "react-native-iap";
 
 const CreditScreen = ({ navigation }) => {
   const currentCredits = useSelector(state => state.credit.credits);
-  const itemSkus = ["com.credit.id", "com.creditFive.id", "com.creditTen.id"];
+  const itemSkus = ["com.credit.id", "com.creditThree.id", "com.creditFive.id"];
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -65,12 +65,12 @@ const CreditScreen = ({ navigation }) => {
         onPress={() => requestPurchase(itemSkus[0], 1)}
       />
       <MainButton
-        name={"5 Credits - $79.99"}
-        onPress={() => requestPurchase(itemSkus[1], 5)}
+        name={"3 Credits - $49.99"}
+        onPress={() => requestPurchase(itemSkus[1], 3)}
       />
       <MainButton
-        name={"10 Credits - $139.99"}
-        onPress={() => requestPurchase(itemSkus[2], 10)}
+        name={"5 Credits - $99.99"}
+        onPress={() => requestPurchase(itemSkus[2], 5)}
       />
       <MainButton
         name={"Back"}

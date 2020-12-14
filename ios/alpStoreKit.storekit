@@ -16,7 +16,7 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "79.99",
+      "displayPrice" : "49.99",
       "familyShareable" : false,
       "internalID" : "146955CB",
       "localizations" : [
@@ -26,12 +26,12 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.creditFive.id",
-      "referenceName" : "creditFive",
+      "productID" : "com.creditThree.id",
+      "referenceName" : "creditThree",
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "139.99",
+      "displayPrice" : "79.99",
       "familyShareable" : false,
       "internalID" : "40D4C429",
       "localizations" : [
@@ -41,8 +41,8 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.creditTen.id",
-      "referenceName" : "creditTen",
+      "productID" : "com.creditFive.id",
+      "referenceName" : "creditFive",
       "type" : "Consumable"
     }
   ],

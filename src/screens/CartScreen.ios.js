@@ -157,8 +157,10 @@ const CartScreen = props => {
         keyExtractor={item => item.id.toString()}
         renderItem={itemData => <SongItem items={itemData.item} deletable />}
       />
-      <BodyText>Credits: {myCredits}</BodyText>
-      <BodyText> Credits Needed: {cartItems.length}</BodyText>
+      <View style={styles.creditView}>
+        <BodyText>Credits: {myCredits}</BodyText>
+        <BodyText> Credits Needed: {cartItems.length}</BodyText>
+      </View>
       <View>
         <HeaderText>By checking you agree to our </HeaderText>
         <View style={styles.termsCheck}>
@@ -202,6 +204,11 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: "gray",
+  },
+  creditView: {
+    borderColor: "white",
+    borderWidth: 1,
+    width: "94%",
   },
 });
 
