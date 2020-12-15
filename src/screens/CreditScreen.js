@@ -44,7 +44,7 @@ const CreditScreen = ({ navigation }) => {
     } catch (err) {
       console.log("request purchase error", err);
       setError(err);
-      alert(error);
+      alert("Purchase cancelled or error trying to purchase.");
       setIsLoading(false);
     }
   };
