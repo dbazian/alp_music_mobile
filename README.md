@@ -32,7 +32,7 @@
 ## About The Project
 
 <div align-"center">
-<img src="./assets/screenshots/screenshotA.png.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotA.png" alt="Login Screenshot" width="20%">
 <img src="./assets/screenshots/screenshotB.png" alt="Login Screenshot" width="20%">
 <img src="./assets/screenshots/screenshotC.png" alt="Login Screenshot" width="20%">
 <img src="./assets/screenshots/screenshotD.png" alt="Login Screenshot" width="20%">
