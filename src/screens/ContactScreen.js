@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, Keyboard } from "react-native";
 import { useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { sendContactForm } from "../../store/actions/contactActions";
@@ -21,11 +21,12 @@ const ContactScreen = props => {
   const dispatch = useDispatch();
 
   const onSubmit = async data => {
+    console.log("test");
     setIsLoading(true);
     try {
       await dispatch(sendContactForm(data));
       alert("Thank you for your patience, we will respond as soon as we can.");
-      data.reset();
+      reset();
     } catch (error) {
       console.log(error);
     }
@@ -91,9 +92,14 @@ const ContactScreen = props => {
               placeholder={"Message"}
               style={styles.box}
               onBlur={onBlur}
+              blurOnSubmit={true}
               multiline={true}
               required
               autoCapitalize="none"
+              onSubmitEditing={() => {
+                Keyboard.dismiss();
+              }}
+              returnKeyType="done"
               onChangeText={value => {
                 onChange(value);
               }}
