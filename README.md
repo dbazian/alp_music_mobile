@@ -23,7 +23,6 @@
 
   <p align="center">
     Mobile music licensing
-
   </p>
 </p>
 
