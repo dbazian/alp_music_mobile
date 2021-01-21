@@ -1,0 +1,59 @@
+{
+  "products" : [
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "C0436DE3",
+      "localizations" : [
+        {
+          "description" : "Purchase 1 Credit",
+          "displayName" : "1 Credit",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.credit.id",
+      "referenceName" : "creditOne",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "49.99",
+      "familyShareable" : false,
+      "internalID" : "146955CB",
+      "localizations" : [
+        {
+          "description" : "Purchase 5 Credits",
+          "displayName" : "5 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.creditsThree.id",
+      "referenceName" : "creditThree",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "79.99",
+      "familyShareable" : false,
+      "internalID" : "40D4C429",
+      "localizations" : [
+        {
+          "description" : "Purchase 10 Credits",
+          "displayName" : "10 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.creditFive.id",
+      "referenceName" : "creditFive",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}
