@@ -13,6 +13,7 @@ import StartupScreen from "../src/screens/StartupScreen";
 import OrderScreen from "../src/screens/OrderScreen";
 import CreditScreen from "../src/screens/CreditScreen";
 import FavoriteScreen from "../src/screens/FavoriteScreen";
+import AboutScreen from "../src/screens/AboutScreen";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +30,7 @@ const UserNavigator = createStackNavigator(
     Orders: OrderScreen,
     Credits: CreditScreen,
     Contact: ContactScreen,
+    About: AboutScreen,
   },
   {
     defaultNavigationOptions: {

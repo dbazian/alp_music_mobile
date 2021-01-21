@@ -13,7 +13,7 @@ import LogoText from "../components/Logos/LogoText";
 import Link from "../components/Texts/Link";
 import FullIndicator from "../components/Indicators/FullIndicator";
 import InstructionsModal from "../modals/InstructionsModal";
-import ContactModal from "../modals/AboutModal";
+import AboutModal from "./AboutScreen";
 import RNIap from "react-native-iap";
 import { setProducts } from "../../store/actions/iapActions";
 
@@ -70,7 +70,6 @@ const UserScreen = props => {
           visible={instructionModalToggle}
           onPress={instructionModal}
         />
-        <ContactModal visible={contactModalToggle} onPress={contactModal} />
         <LogoText />
         <Link onPress={instructionModal} title={"Instructions"} />
         <Link
@@ -86,7 +85,10 @@ const UserScreen = props => {
           title={"Contact"}
         />
 
-        <Link onPress={contactModal} title={"About"} />
+        <Link
+          onPress={() => props.navigation.navigate({ routeName: "About" })}
+          title={"About"}
+        />
         <Link onPress={() => dispatch(authActions.logout())} title={"Logout"} />
         <TouchableOpacity
           onPress={() => props.navigation.navigate({ routeName: "Search" })}>
