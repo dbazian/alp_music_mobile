@@ -32,11 +32,16 @@
 ## About The Project
 
 <div align-"center">
-<img src="./assets/login-ss.png" alt="Login Screenshot" width="20%">
-<img src="./assets/filters-ss.png" alt="Login Screenshot" width="20%">
-<img src="./assets/songs-ss.png" alt="Login Screenshot" width="20%">
-<img src="./assets/orders-ss.png" alt="Login Screenshot" width="20%">
-<img src="./assets/di-ss.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotA.png.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotB.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotC.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotD.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotE.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotF.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotG.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotH.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotI.png" alt="Login Screenshot" width="20%">
+<img src="./assets/screenshots/screenshotJ.png" alt="Login Screenshot" width="20%">
 </div>
 
 ### Built With
