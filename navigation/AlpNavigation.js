@@ -45,9 +45,15 @@ const UserNavigator = createStackNavigator(
       title: <UserHeader />,
       headerBackTitle: "Back",
       headerMode: "float",
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item title="Favorite" iconName="ios-star" />
+        </HeaderButtons>
+      ),
       headerTitleStyle: { alignSelf: "center" },
       headerTitleContainerStyle: {
         left: 0,
+        right: 0,
       },
     },
   }
@@ -111,6 +117,11 @@ const CartNavigator = createStackNavigator(
       headerTitle: () => <HeaderLogo />,
       headerBackTitle: "Back",
       headerMode: "float",
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item title="Favorite" iconName="ios-star" />
+        </HeaderButtons>
+      ),
     },
     headerBackStyle: {
       fontFamily: "Raleway-Medium",

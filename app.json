@@ -3,6 +3,7 @@
     "name": "ALPMusic",
     "slug": "ALPMusic",
     "version": "1.0.0",
+    "permissions": ["WRITE_EXTERNAL_STORAGE"],
     "assetBundlePatterns": ["**/*"],
     "description": "music licensing",
     "sdkVersion": "39.0.0",

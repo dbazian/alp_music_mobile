@@ -16,7 +16,6 @@ import favoriteReducer from "./store/reducers/favoriteReducer";
 import creditReducer from "./store/reducers/creditReducer";
 import userReducer from "./store/reducers/userReducer";
 import iapReducer from "./store/reducers/iapReducer";
-import RNIap from "react-native-iap";
 
 enableScreens();
 

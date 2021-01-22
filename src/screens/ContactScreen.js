@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     fontSize: hp("2.5%"),
     fontFamily: "Raleway-Medium",
+    textAlignVertical: "top",
   },
   inputText: {
     textAlign: "left",
