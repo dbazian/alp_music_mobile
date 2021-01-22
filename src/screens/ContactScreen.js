@@ -21,12 +21,10 @@ const ContactScreen = props => {
   const dispatch = useDispatch();
 
   const onSubmit = async data => {
-    console.log("test");
     setIsLoading(true);
     try {
       await dispatch(sendContactForm(data));
       alert("Thank you for your patience, we will respond as soon as we can.");
-      reset();
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +130,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor: Colors.primary,
     width: wp("95%"),
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
     borderWidth: 5,
     shadowColor: Colors.primary,
     shadowOpacity: 0.9,
@@ -142,6 +141,10 @@ const styles = StyleSheet.create({
   },
   inputText: {
     textAlign: "left",
+  },
+  text: {
+    padding: 1,
+    margin: 1,
   },
 });
 
