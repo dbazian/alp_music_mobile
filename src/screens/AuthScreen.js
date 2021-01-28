@@ -13,7 +13,6 @@ import Gradient from "../components/Wrappers/Gradient";
 import LogoText from "../components/Logos/LogoText";
 import Logo from "../components/Logos/Logo";
 import DefaultStyles from "../../constants/default-styles";
-import { getUserName } from "../../store/actions/userActions";
 
 const AuthScreen = props => {
   const { control, handleSubmit, errors } = useForm();
@@ -36,7 +35,6 @@ const AuthScreen = props => {
     try {
       setIsLoading(true);
       await dispatch(authActions.login(data));
-      await dispatch(getUserName());
       setIsLoading(false);
       props.navigation.navigate("Tab");
     } catch (error) {

@@ -7,19 +7,18 @@ import * as orderActions from "../../store/actions/orderActions";
 import * as authActions from "../../store/actions/authActions";
 import { setCredit } from "../../store/actions/creditActions";
 import { setCart } from "../../store/actions/cartActions";
+import { getUserName } from "../../store/actions/userActions";
 import Gradient from "../components/Wrappers/Gradient";
 import Logo from "../components/Logos/Logo";
 import LogoText from "../components/Logos/LogoText";
 import Link from "../components/Texts/Link";
 import FullIndicator from "../components/Indicators/FullIndicator";
 import InstructionsModal from "../modals/InstructionsModal";
-import AboutModal from "./AboutScreen";
 import RNIap from "react-native-iap";
 import { setProducts } from "../../store/actions/iapActions";
 
 const UserScreen = props => {
   const [instructionModalToggle, setInstructionModalToggle] = useState(false);
-  const [contactModalToggle, setContactModalToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const itemSkus = Platform.select({
     ios: ["com.credit.id", "com.creditsThree.id", "com.creditFive.id"],
@@ -35,24 +34,16 @@ const UserScreen = props => {
     setInstructionModalToggle(!instructionModalToggle);
   };
 
-  const contactModal = () => {
-    setContactModalToggle(!contactModalToggle);
-  };
-
   const loadUser = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      await loadProducts();
-      await dispatch(getSongs());
-      await dispatch(setCart());
-      await dispatch(orderActions.setOrders());
-      await dispatch(setCredit());
-      await dispatch(setFavorite());
-      setIsLoading(false);
-    } catch (error) {
-      console.log("error loading", error);
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await dispatch(orderActions.setOrders());
+    await dispatch(getSongs());
+    await dispatch(setCredit());
+    await dispatch(setFavorite());
+    await loadProducts();
+    await dispatch(setCart());
+    await dispatch(getUserName());
+    setIsLoading(false);
   });
 
   const loadProducts = async () => {
