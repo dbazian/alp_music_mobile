@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
@@ -23,6 +24,10 @@ import HeaderLogo from "./navComponents/HeaderLogo";
 import UserHeader from "./navComponents/UserHeader";
 import Colors from "../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const UserNavigator = createStackNavigator(
   {
@@ -37,6 +42,7 @@ const UserNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: "transparent",
         shadowColor: "transparent",
+        height: hp("12%"),
       },
       headerBackground: () => (
         <LinearGradient colors={["black", "#00202a"]} style={{ flex: 1 }} />
@@ -44,6 +50,10 @@ const UserNavigator = createStackNavigator(
       headerTintColor: Colors.primary,
       title: <UserHeader />,
       headerBackTitle: "Back",
+      headerBackTitleStyle: {
+        fontSize: hp("2.5%"),
+        fontFamily: "Raleway-Medium",
+      },
       headerMode: "float",
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
@@ -54,6 +64,7 @@ const UserNavigator = createStackNavigator(
       headerTitleContainerStyle: {
         left: 0,
         right: 0,
+        alignItems: "center",
       },
     },
   }
@@ -70,6 +81,7 @@ const SearchNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: "transparent",
         shadowColor: "transparent",
+        height: hp("12%"),
       },
       headerBackground: () => (
         <LinearGradient colors={["black", "#00202a"]} style={{ flex: 1 }} />
@@ -82,15 +94,16 @@ const SearchNavigator = createStackNavigator(
       },
       headerTitle: () => <HeaderLogo />,
       headerBackTitle: "Back",
+      headerBackTitleStyle: {
+        fontSize: hp("2.5%"),
+        fontFamily: "Raleway-Medium",
+      },
       headerMode: "float",
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item title="Favorite" iconName="ios-star" />
         </HeaderButtons>
       ),
-    },
-    headerBackStyle: {
-      fontFamily: "Raleway-Medium",
     },
   }
 );
@@ -104,6 +117,7 @@ const CartNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: "transparent",
         shadowColor: "transparent",
+        height: hp("12%"),
       },
       headerBackground: () => (
         <LinearGradient colors={["black", "#00202a"]} style={{ flex: 1 }} />
@@ -116,15 +130,16 @@ const CartNavigator = createStackNavigator(
       headerTintColor: Colors.primary,
       headerTitle: () => <HeaderLogo />,
       headerBackTitle: "Back",
+      headerBackTitleStyle: {
+        fontSize: hp("2.5%"),
+        fontFamily: "Raleway-Medium",
+      },
       headerMode: "float",
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item title="Favorite" iconName="ios-star" />
         </HeaderButtons>
       ),
-    },
-    headerBackStyle: {
-      fontFamily: "Raleway-Medium",
     },
   }
 );
@@ -138,7 +153,7 @@ const AlpTabNavigator = createBottomTabNavigator(
           return (
             <FontAwesomeIcon
               icon={faUser}
-              size={20}
+              size={hp("2%")}
               color={tabInfo.tintColor}
             />
           );
@@ -152,7 +167,7 @@ const AlpTabNavigator = createBottomTabNavigator(
           return (
             <FontAwesomeIcon
               icon={faSearch}
-              size={20}
+              size={hp("2%")}
               color={tabInfo.tintColor}
             />
           );
@@ -167,7 +182,7 @@ const AlpTabNavigator = createBottomTabNavigator(
           return (
             <FontAwesomeIcon
               icon={faShoppingCart}
-              size={20}
+              size={hp("2%")}
               color={tabInfo.tintColor}
             />
           );
@@ -177,9 +192,13 @@ const AlpTabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
+      labelStyle: {
+        fontSize: hp("1.5%"),
+        fontFamily: "Raleway-Medium",
+      },
       activeTintColor: Colors.primary,
       inactiveTintColor: "black",
-      style: { backgroundColor: "white" },
+      style: { backgroundColor: "white", height: hp("6%") },
     },
   }
 );
