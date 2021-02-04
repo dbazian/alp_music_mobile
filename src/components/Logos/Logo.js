@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   image: {
     resizeMode: "contain",
     width: wp("40%"),
-    height: hp("30%"),
+    height: hp("25%"),
   },
 });
 

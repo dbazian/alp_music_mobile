@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlay, faPause } from "@fortawesome/pro-light-svg-icons";
 import Colors from "../../../constants/Colors";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 
 const PlayPause = props => {
   const stopAudio = useSelector(state => state.player.stopAudio);
